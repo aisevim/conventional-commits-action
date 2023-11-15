@@ -1,0 +1,17 @@
+name: Pull Request Commit Message Checker
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check Commit Message
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
