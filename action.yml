@@ -7,6 +7,10 @@ inputs:
     required: false
     default: '^(wip|Merge?.+|Revert?.+)|(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(\([-A-Za-z0-9_ ]+\))?!?: .+'
 
+  github-token:
+    description: 'GitHub token'
+    required: true
+
 runs:
-  using: node18
+  using: node20
   main: src/index.js
