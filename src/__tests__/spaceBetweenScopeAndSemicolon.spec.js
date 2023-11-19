@@ -1,12 +1,14 @@
 import { expect, test, describe } from 'vitest'
 import { regexSpaceAfterScopeBeforeColon } from '../regex'
 
-describe.only('Space Between Scope And Semicolon', () => {
+describe('Space Between Scope And Semicolon', () => {
   test("not", () => {
     expect("Update documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
     expect("docs documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
     expect("docs() documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
     expect("docs(foo) documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
+    expect("docs () documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
+    expect("docs (foo) documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
 
     expect("docs: Update documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
     expect("docs!: Update documentation".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
@@ -51,7 +53,7 @@ describe.only('Space Between Scope And Semicolon', () => {
     expect("docs ! : ".match(regexSpaceAfterScopeBeforeColon)).toBeNull()
   })
   
-  test("triggered", () => {
+  test("match", () => {
     expect("docs() : Update documentation".match(regexSpaceAfterScopeBeforeColon)?.groups?.position).toBe(' ')
     expect("docs()! : Update documentation".match(regexSpaceAfterScopeBeforeColon)?.groups?.position).toBe(' ')
     expect(`docs() !: Update documentation`.match(regexSpaceAfterScopeBeforeColon)?.groups?.position).toBe(' !')
