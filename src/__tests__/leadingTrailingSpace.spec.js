@@ -32,23 +32,6 @@ describe('Leading Trailing Space', () => {
     expect("docs() !: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
     expect("docs()! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
     expect("docs() ! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-
-    expect("docs: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs!: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs !: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs ! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(foo): Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(foo)!: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(foo) !: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(foo)! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(foo) ! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs(): Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs() : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs()!: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs() !: Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs()! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
-    expect("docs() ! : Update documentation".match(regexLeadingTrailingSpace)).toBeNull()
   })
   
   test("match", () => {
