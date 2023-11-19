@@ -10,7 +10,7 @@ export const regexEmptyScope = /^(?:build|chore|ci|docs|feat|fix|perf|refactor|r
 
 export const regexEmptyDescription = /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:\((?:[-A-Za-z0-9_ ]+|)\))?!?:(?<position>(?:\s+)?)$/;
 
-export const regexLeadingTrailingSpace = /^(?<position>\s+)|$/;
+export const regexLeadingTrailingSpace = /^(?<position>\s+)(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(.+)?$/;
 
 export const regexUnknownType = /^(?!build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.*)*$/;
 
