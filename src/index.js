@@ -14,6 +14,8 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'));
     const hasTitlePR = core.getInput('has-title-pr')
     const hasCommits = core.getInput('has-commits')
+    console.log(github.context.payload)
+    console.log(github.context.payload.action)
     const onPRTitleChange = hasTitlePR && github.context.payload.action === 'edited'
     const onCommitChange = hasCommits && (
       github.context.payload.action === 'opened' ||
