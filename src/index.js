@@ -26,6 +26,10 @@ async function run() {
     let page = 1
     let text = ''
 
+    console.log('onPRTitleChange', onPRTitleChange)
+    console.log('action', github.context.payload.action)
+    console.log('hasTitlePR', hasTitlePR)
+    console.log('title', github.context.payload.changes?.title)
     if (onPRTitleChange) {
       text = github.context.payload.pull_request?.title ?? ''
       console.log(text)
