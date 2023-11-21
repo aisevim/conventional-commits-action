@@ -5,6 +5,16 @@ export const rulesConfig = [
     errorMessage: 'The commit message has an empty description.'
   },
   {
+    id: 'Missing Colon',
+    regex: /^(?!.*:).*(?<position>)$/d,
+    errorMessage: 'Missing Colon',
+  },
+  {
+    id: 'Missing Space',
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(?<position>(?!\s))(.+)?/d,
+    errorMessage: 'The commit message should have a space after the colon.',
+  },
+  {
     id: 'LeadingTrailingSpace',
     regex: /^(?<position>\s+)(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(.+)?/d,
     errorMessage: 'The commit message should not have leading/trailing spaces.',
