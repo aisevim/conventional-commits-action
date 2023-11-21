@@ -29,17 +29,21 @@ async function run() {
       return commits
     }
 
-    console.log(github.context.eventName)
-
     if (github.context.eventName === 'pull_request') {
-      const commitsInfo = await getCommits(page)
-      const commitInfo = commitsInfo?.at(-1)
-      const commitMessage = commitInfo?.commit?.message
+      let text = ''
+
+      if(github.context.payload.action === 'edited') {
+        text = github.context.payload.pull_request?.title;
+      } else {
+        const commitsInfo = await getCommits(page)
+        const commitInfo = commitsInfo?.at(-1)
+        text = commitInfo?.commit?.message
+      }
       const [isCommitInvalid, log] = checkCommitMessages(commitMessage)
 
       if (commitMessage && isCommitInvalid) {
         core.setFailed('The commit message does not adhere to the expected format.');
-        core.warning(`${log}`);
+        core.warning(log);
         core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
 
 The structure of a Conventional Commit message typically follows this format:
