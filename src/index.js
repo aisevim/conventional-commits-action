@@ -20,25 +20,23 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'));
     const hasTitlePR = core.getInput('has-pr-title')
     const hasCommits = core.getInput('has-commits')
+    let logs = []
     let page = 1
     let text = ''
 
-    console.log('onActions', onActions)
-    console.log('hasTitlePR', hasTitlePR)
-    console.log('title', github.context.payload.changes?.title)
-
     if (onActions && hasTitlePR) {
       text = github.context.payload.pull_request?.title ?? ''
-      console.log(text)
-      generateLog(text, 'pr-title')
+      logs.push({text, type: 'pr-title'})
     }
 
     if (onActions && hasCommits) {
       const commitsInfo = await getCommits(octokit, page)
       const commitInfo = commitsInfo?.at(-1)
       text = commitInfo?.commit?.message ?? ''
-      generateLog(text, 'pr-commit')
+      logs.push({text, type: 'pr-commit'})
     }
+
+    generateLog(logs)
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -65,13 +63,21 @@ async function getCommits(octokit, page) {
   return commits
 }
 
-function generateLog(text, type) {
-  const [isCommitInvalid, log] = checkCommitMessages(text)
-  const logType = type === 'pr-title' ? 'PR title' : 'commit message'
+function generateLog(_logs) {
+  let hasError = false
 
-  if (isCommitInvalid) {
-    core.setFailed(`The ${logType} does not adhere to the expected format.`);
-    core.warning(log);
+  _logs.forEach(({text, type}) => {
+    const [isCommitInvalid, log] = checkCommitMessages(text)
+    const logType = type === 'pr-title' ? 'PR title' : 'commit message'
+
+    if (isCommitInvalid) {
+      core.setFailed(`The ${logType} does not adhere to the expected format.`);
+      core.warning(log);
+      hasError = true
+    }
+  })
+
+  if (!hasError) {
     core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
 
 The structure of a Conventional Commit message typically follows this format:
