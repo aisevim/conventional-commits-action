@@ -1,16 +1,21 @@
 export const rulesConfig = [
   {
+    id: 'EmptyCommit',
+    regex: /^(?<position>)$/d,
+    errorMessage: 'The commit message is empty.',
+  },
+  {
     id: 'EmptyDescription',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:\((?:[-A-Za-z0-9_ ]+|)\))?!?:(?<position>(?:\s+)?)$/d,
     errorMessage: 'The commit message has an empty description.'
   },
   {
-    id: 'Missing Colon',
-    regex: /^(?!.*:).*(?<position>)$/d,
+    id: 'MissingColon',
+    regex: /^(?!$)(?!.*:).*(?<position>)$/d,
     errorMessage: 'Missing Colon',
   },
   {
-    id: 'Missing Space',
+    id: 'MissingSpace',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(?<position>(?!\s))(.+)?/d,
     errorMessage: 'The commit message should have a space after the colon.',
   },
