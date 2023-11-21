@@ -1,0 +1,93 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Generated Logs > 1 match on no description 1`] = `
+"
+docs: 
+     ↑
+     ┆
+     ╵--- The commit message has an empty description.
+
+"
+`;
+
+exports[`Generated Logs > 1 match on no description 2`] = `
+"
+ docs: 
+↑
+┆
+╵--- The commit message should not have leading/trailing spaces.
+
+"
+`;
+
+exports[`Generated Logs > 2 match on no description, no scope description 1`] = `
+"
+docs(): 
+     ↑ ↑
+     ┆ ┆
+     ┆ ╵--- The commit message has an empty description.
+     ┆
+     ╵--- The commit message has an empty scope.
+
+"
+`;
+
+exports[`Generated Logs > 3 match on no description, no scope description, no space before scope and colon 1`] = `
+"
+docs() : 
+     ↑↑ ↑
+     ┆┆ ┆
+     ┆┆ ╵--- The commit message has an empty description.
+     ┆┆
+     ┆╵--- The commit message should not have spaces before the colon.
+     ┆
+     ╵--- The commit message has an empty scope.
+
+"
+`;
+
+exports[`Generated Logs > 4 match on no description, no scope description, no space before scope and colon, no space after type and before scope 1`] = `
+"
+docs () : 
+    ↑ ↑↑ ↑
+    ┆ ┆┆ ┆
+    ┆ ┆┆ ╵--- The commit message has an empty description.
+    ┆ ┆┆
+    ┆ ┆╵--- The commit message should not have spaces before the colon.
+    ┆ ┆
+    ┆ ╵--- The commit message has an empty scope.
+    ┆
+    ╵--- The commit message should not have a space between the type and the scope.
+
+"
+`;
+
+exports[`Generated Logs > with match on the same position 1`] = `
+"
+docs:
+     ↑
+     ┆
+     ┆--- The commit message has an empty description.
+     ┆
+     ╵--- The commit message should have a space after the colon.
+
+"
+`;
+
+exports[`Generated Logs > with match on the same position 2`] = `
+"
+docsfoo()foo:
+     ↑  ↑ ↑  ↑
+     ┆  ┆ ┆  ┆
+     ┆  ┆ ┆  ┆--- The commit message has an empty description.
+     ┆  ┆ ┆  ┆
+     ┆  ┆ ┆  ╵--- The commit message should have a space after the colon.
+     ┆  ┆ ┆
+     ┆  ┆ ╵--- The commit message contains an invalid character before the colon.
+     ┆  ┆
+     ┆  ╵--- The commit message has an empty scope.
+     ┆
+     ╵--- The commit message contains an invalid character between the type and the scope.
+
+"
+`;
