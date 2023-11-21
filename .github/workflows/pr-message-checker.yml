@@ -1,8 +1,8 @@
-name: Pull Request Commit Message Checker
+name: Pull Request Message Checker
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [edited, opened, synchronize, reopened]
 
 jobs:
   check-commit:
