@@ -12,7 +12,7 @@ function applyRuleToMatrix(_matrix, position, errorMessage) {
     const middlePosition = position[0] + Math.floor((position[1] - position[0]) / 2);
 
     if (i === 0) {
-			line[middlePosition] = "↑";
+      line[middlePosition] = "↑";
 		} else {
 			line[middlePosition] = i + 1 === matrix.length ? "╵" : '┆';
 		}
@@ -37,20 +37,21 @@ function hasError(matrix) {
 }
 
 export function checkCommitMessages(message) {
-  const maxLength = message.length + 10;
+  const msg = message.split('\n')?.[0] || message;
+  const maxLength = msg.length + 10;
   let matrix = createMatrix(3, maxLength);
 
   for (const rule of rulesConfig) {
-    const match = message.match(rule.regex);
+    const match = msg.match(rule.regex);
     const position = match?.indices?.groups?.position;
 
     if (!position) {
-			continue
+      continue
 		}
-
+    
 		matrix = applyRuleToMatrix(matrix, position, rule.errorMessage);
 		matrix.push(...createMatrix(2, maxLength));
   }
 
-  return [hasError(matrix), `\n${message}\n${formatLog(matrix)}`];
+  return [hasError(matrix), `\n${msg}\n${formatLog(matrix)}`];
 }
