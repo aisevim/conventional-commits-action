@@ -14,9 +14,10 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'));
     const hasTitlePR = core.getInput('has-title-pr')
     const hasCommits = core.getInput('has-commits')
-    console.log(github.context.payload)
-    console.log(github.context.payload.action)
-    const onPRTitleChange = hasTitlePR && github.context.payload.action === 'edited'
+    const onPRTitleChange = hasTitlePR && (
+      github.context.payload.action === 'edited' &&
+      github.context.payload.changes?.title
+    )
     const onCommitChange = hasCommits && (
       github.context.payload.action === 'opened' ||
       github.context.payload.action === 'synchronize' ||
@@ -27,6 +28,7 @@ async function run() {
 
     if (onPRTitleChange) {
       text = github.context.payload.pull_request?.title ?? ''
+      console.log(text)
       generateLog(text, 'pr-title')
     }
 
@@ -64,9 +66,11 @@ async function getCommits(octokit, page) {
 
 function generateLog(text, type) {
   const [isCommitInvalid, log] = checkCommitMessages(text)
+  console.log('isCommitInvalid', isCommitInvalid)
+  console.log('log', log)
   const logType = type === 'pr-title' ? 'PR title' : 'commit message'
 
-  if (text && isCommitInvalid) {
+  if (isCommitInvalid) {
     core.setFailed(`The ${logType} does not adhere to the expected format.`);
     core.warning(log);
     core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
