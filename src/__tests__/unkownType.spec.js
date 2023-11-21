@@ -1,43 +1,45 @@
 import { expect, test, describe } from 'vitest'
-import { regexUnknownType } from '../regex'
+import { rulesConfig } from '../rules'
+
+const regexUnknownType = rulesConfig.find(rule => rule.id === 'UnknownType')?.regex
 
 describe('Unkown type', () => {
   test("not", () => {
-    expect("Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs documentation".match(regexUnknownType)).toBeNull()
-    expect("docs() documentation".match(regexUnknownType)).toBeNull()
-    expect("docs(foo) documentation".match(regexUnknownType)).toBeNull()
-    expect("docs () documentation".match(regexUnknownType)).toBeNull()
-    expect("docs (foo) documentation".match(regexUnknownType)).toBeNull()
+    expect("Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs() documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo) documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs () documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs (foo) documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
 
-    expect("docs: Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs!: Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs(foo): Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs(foo)!: Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs()!: Update documentation".match(regexUnknownType)).toBeNull()
-    expect("docs()!: Update documentation".match(regexUnknownType)).toBeNull()
+    expect("docs: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo): Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo)!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs()!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs()!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
 
-    expect(" docs: Update documentation".match(regexUnknownType)).toBeNull()
-    expect(" docs!: Update documentation".match(regexUnknownType)).toBeNull()
-    expect(" docs(foo): Update documentation".match(regexUnknownType)).toBeNull()
-    expect(" docs(foo)!: Update documentation".match(regexUnknownType)).toBeNull()
-    expect(" docs()!: Update documentation".match(regexUnknownType)).toBeNull()
+    expect(" docs: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect(" docs!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect(" docs(foo): Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect(" docs(foo)!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect(" docs()!: Update documentation".match(regexUnknownType)?.groups?.position).toBeUndefined()
 
-    expect("docs:".match(regexUnknownType)).toBeNull()
-    expect("docs!:".match(regexUnknownType)).toBeNull()
-    expect("docs !:".match(regexUnknownType)).toBeNull()
-    expect("docs! :".match(regexUnknownType)).toBeNull()
-    expect("docs ! :".match(regexUnknownType)).toBeNull()
-    expect("docs(foo):".match(regexUnknownType)).toBeNull()
-    expect("docs(foo)!:".match(regexUnknownType)).toBeNull()
+    expect("docs:".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs!:".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs !:".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs! :".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs ! :".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo):".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo)!:".match(regexUnknownType)?.groups?.position).toBeUndefined()
 
-    expect("docs: ".match(regexUnknownType)).toBeNull()
-    expect("docs!: ".match(regexUnknownType)).toBeNull()
-    expect("docs !: ".match(regexUnknownType)).toBeNull()
-    expect("docs! : ".match(regexUnknownType)).toBeNull()
-    expect("docs ! : ".match(regexUnknownType)).toBeNull()
-    expect("docs(foo): ".match(regexUnknownType)).toBeNull()
-    expect("docs(foo)!: ".match(regexUnknownType)).toBeNull()
+    expect("docs: ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs!: ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs !: ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs! : ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs ! : ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo): ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+    expect("docs(foo)!: ".match(regexUnknownType)?.groups?.position).toBeUndefined()
   })
   
   test("match", () => {
