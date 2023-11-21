@@ -6,7 +6,13 @@ import { checkCommitMessages } from "./checker.js"
 const maxCommitsPerPage = 100
 
 async function run() {
-  if (github.context.eventName !== 'pull_request') {
+  const onActions = (
+    github.context.payload.action === 'edited' ||
+    github.context.payload.action === 'opened' ||
+    github.context.payload.action === 'synchronize' ||
+    github.context.payload.action === 'reopened'
+  )
+  if (github.context.eventName !== 'pull_request' || !onActions) {
     return
   }
 
@@ -14,29 +20,19 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'));
     const hasTitlePR = core.getInput('has-title-pr')
     const hasCommits = core.getInput('has-commits')
-    const onPRTitleChange = hasTitlePR && (
-      github.context.payload.action === 'edited' &&
-      github.context.payload.changes?.title
-    )
-    const onCommitChange = hasCommits && (
-      github.context.payload.action === 'opened' ||
-      github.context.payload.action === 'synchronize' ||
-      github.context.payload.action === 'reopened'
-    )
     let page = 1
     let text = ''
 
-    console.log('onPRTitleChange', onPRTitleChange)
     console.log('action', github.context.payload.action)
     console.log('hasTitlePR', hasTitlePR)
     console.log('title', github.context.payload.changes?.title)
-    if (onPRTitleChange) {
+    if (onActions && hasTitlePR) {
       text = github.context.payload.pull_request?.title ?? ''
       console.log(text)
       generateLog(text, 'pr-title')
     }
 
-    if (onCommitChange) {
+    if (onActions && hasCommits) {
       const commitsInfo = await getCommits(octokit, page)
       const commitInfo = commitsInfo?.at(-1)
       text = commitInfo?.commit?.message ?? ''
