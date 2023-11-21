@@ -72,7 +72,7 @@ function generateLog(_logs) {
 
     if (isCommitInvalid) {
       core.setFailed(`The ${logType} does not adhere to the expected format.`);
-      core.warning(log);
+      core.info(log);
       hasError = true
     }
   })
