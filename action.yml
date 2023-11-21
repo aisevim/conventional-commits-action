@@ -2,11 +2,6 @@ name: Conventional Commit Checker
 description: Checks commit messages against conventional commit format
 
 inputs:
-  commit-regex:
-    description: 'Regex pattern for commit message validation'
-    required: false
-    default: '^(wip|Merge?.+|Revert?.+)|(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(\([-A-Za-z0-9_ ]+\))?!?: .+'
-
   github-token:
     description: 'GitHub token'
     required: true

@@ -6,7 +6,6 @@ import { checkCommitMessages } from "./checker.js"
 async function run() {
   try {
     const octokit = github.getOctokit(core.getInput('github-token')); // Tu dois fournir un token d'accès GitHub
-    const commitRegex = new RegExp(core.getInput('commit-regex'));
     const maxCommitsPerPage = 100
     let page = 1
     let commits = []
@@ -39,7 +38,7 @@ async function run() {
 
       if (commitMessage && isCommitInvalid) {
         core.setFailed('The commit message does not adhere to the expected format.');
-        core.warning(log);
+        core.warning(`${log}`);
         core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
 
 The structure of a Conventional Commit message typically follows this format:
