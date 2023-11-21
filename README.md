@@ -4,11 +4,9 @@ This GitHub Action checks commit messages against the conventional commit format
 
 ## Inputs
 
-### `commit-regex`
+### `github token`
 
-Regex pattern for commit message validation.
-
-Default: `'^(wip|Merge?.+|Revert?.+)|(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(\([-A-Za-z0-9_ ]+\))?!?: .+'`
+This action requires the `github token` for repository access.
 
 ## Usage
 
@@ -29,5 +27,5 @@ jobs:
       - name: Check Commit Message
         uses: aisevim/conventional-commit-checker@v1
         with:
-          commit-regex: '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z]+\))?: .+'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
