@@ -12,6 +12,4 @@ export const regexEmptyDescription = /^(?:build|chore|ci|docs|feat|fix|perf|refa
 
 export const regexLeadingTrailingSpace = /^(?<position>\s+)(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(.+)?/d
 
-export const regexUnknownType = /^(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release))(\s+)?\b(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/;
-
-export const regexByPass = /^(wip|Merge?.+|Revert?.+)/
+export const regexUnknownType = /^(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release))(\s+)?\b(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/d;
