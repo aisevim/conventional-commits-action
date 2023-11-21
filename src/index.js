@@ -77,7 +77,7 @@ function generateLog(_logs) {
     }
   })
 
-  if (!hasError) {
+  if (hasError) {
     core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
 
 The structure of a Conventional Commit message typically follows this format:
