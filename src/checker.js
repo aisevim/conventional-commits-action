@@ -36,7 +36,7 @@ function hasError(matrix) {
 	return Boolean(matrix.flat(2).join('').replace(/\s+$/g, ''))
 }
 
-function checkCommitMessages(message) {
+export function checkCommitMessages(message) {
   const maxLength = message.length + 10;
   let matrix = createMatrix(3, maxLength);
 
@@ -54,5 +54,3 @@ function checkCommitMessages(message) {
 
   return [hasError(matrix), `\n${message}\n${formatLog(matrix)}`];
 }
-
-console.log(checkCommitMessages('feat(asd): sad'));
