@@ -1,5 +1,6 @@
 name: Conventional Commit Checker
 description: Checks commit messages against conventional commit format
+author: aisevim
 
 inputs:
   github-token:
