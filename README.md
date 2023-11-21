@@ -89,9 +89,9 @@ jobs:
 feat() : new feature
      ↑↑
      ┆┆
-     ┆╵--- The commit message should not have spaces before the colon.
+     ┆╵--- Remove spaces before the colon in the commit message.
      ┆
-     ╵--- The commit message has an empty scope.
+     ╵--- Empty commit scope provided.
 ```
 
 `feat ():`
@@ -99,13 +99,13 @@ feat() : new feature
 feat ():
     ↑ ↑ ↑
     ┆ ┆ ┆
-    ┆ ┆ ┆--- The commit message has an empty description.
+    ┆ ┆ ┆--- Missing or empty commit description.
     ┆ ┆ ┆
-    ┆ ┆ ╵--- The commit message should have a space after the colon.
+    ┆ ┆ ╵--- Space after the colon is required.
     ┆ ┆
-    ┆ ╵--- The commit message has an empty scope.
+    ┆ ╵--- Empty commit scope provided.
     ┆
-    ╵--- The commit message should not have a space between the type and the scope.
+    ╵--- Avoid space between commit type and scope.
 ```
 
 `fzeat (): new feat`
@@ -113,7 +113,7 @@ feat ():
 fzeat (): new feat
   ↑
   ┆
-  ╵--- The commit type is unknown or misspelled.
+  ╵--- Unrecognized commit type used.
 ```
 
 ## License

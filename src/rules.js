@@ -2,59 +2,56 @@ export const rulesConfig = [
   {
     id: 'EmptyCommit',
     regex: /^(?<position>)$/d,
-    errorMessage: 'The commit message is empty.',
+    errorMessage: 'Empty commit message.',
   },
   {
     id: 'EmptyDescription',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:\((?:[-A-Za-z0-9_ ]+|)\))?!?:(?<position>(?:\s+)?)$/d,
-    errorMessage: 'The commit message has an empty description.'
+    errorMessage: 'Missing or empty commit description.'
   },
   {
     id: 'MissingColon',
     regex: /^(?!$)(?!.*:).*(?<position>)$/d,
-    errorMessage: 'Missing Colon',
+    errorMessage: 'Colon is missing in the commit message structure.',
   },
   {
     id: 'MissingSpace',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(?<position>(?!\s))(.+)?/d,
-    errorMessage: 'The commit message should have a space after the colon.',
+    errorMessage: 'Space after the colon is required.',
   },
   {
     id: 'LeadingTrailingSpace',
     regex: /^(?<position>\s+)(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(.+)?:(.+)?/d,
-    errorMessage: 'The commit message should not have leading/trailing spaces.',
-    fix: true,
+    errorMessage: 'Avoid leading or trailing spaces in the commit message.',
   },
   {
     id: 'UnknownType',
     regex: /^(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release))(\s+)?\b(?!(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/d,
-    errorMessage: 'The commit type is unknown or misspelled.',
+    errorMessage: 'Unrecognized commit type used.',
   },
   {
     id: 'SpaceAfterScopeBeforeColon',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))!?)(?<position>(?:\s+)(?:\!)?(?:\s+)?):(?:\s)?(?:.+)?/d,
-    errorMessage: 'The commit message should not have spaces before the colon.',
-    fix: true,
+    errorMessage: 'Remove spaces before the colon in the commit message.',
   },
   {
     id: 'CharacterAfterScopeBeforeColon',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:\!)?)(?!\!)(?<position>\S+):(?:\s)?(.+)?/d,
-    errorMessage: 'The commit message contains an invalid character before the colon.',
-    fix: true,
+    errorMessage: 'Invalid character before the colon in the commit message.',
   },
   {
     id: 'EmptyScope',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?<position>\(\))(?:(?:.+)?\!)?(?:.+)?:(?:\s)?(.+)?/d,
-    errorMessage: 'The commit message has an empty scope.'
+    errorMessage: 'Empty commit scope provided.'
   },
   {
     id: 'SpaceBetweenTypeAndScope',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>\s+)(?:(?:\([-A-Za-z0-9_ ]+\))|(\(\)))(?:.+)?:(?:\s)?(.+)?/d,
-    errorMessage: 'The commit message should not have a space between the type and the scope.'
+    errorMessage: 'Avoid space between commit type and scope.'
   },
   {
     id: 'CharacterBetweenTypeAndScope',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>\S+)(?:(?:\([-A-Za-z0-9_ ]+\))|(\(\)))(?:.+)?:(?:\s)?(.+)?/d,
-    errorMessage: 'The commit message contains an invalid character between the type and the scope.'
+    errorMessage: 'Unexpected character between commit type and scope.'
   },
 ];

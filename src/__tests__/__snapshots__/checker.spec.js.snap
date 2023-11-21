@@ -5,7 +5,7 @@ exports[`Generated Logs > 1 match on no description 1`] = `
 docs: 
      ↑
      ┆
-     ╵--- The commit message has an empty description.
+     ╵--- Missing or empty commit description.
 
 "
 `;
@@ -15,7 +15,7 @@ exports[`Generated Logs > 1 match on no description 2`] = `
  docs: 
 ↑
 ┆
-╵--- The commit message should not have leading/trailing spaces.
+╵--- Avoid leading or trailing spaces in the commit message.
 
 "
 `;
@@ -25,9 +25,9 @@ exports[`Generated Logs > 2 match on no description, no scope description 1`] = 
 docs(): 
      ↑ ↑
      ┆ ┆
-     ┆ ╵--- The commit message has an empty description.
+     ┆ ╵--- Missing or empty commit description.
      ┆
-     ╵--- The commit message has an empty scope.
+     ╵--- Empty commit scope provided.
 
 "
 `;
@@ -37,11 +37,11 @@ exports[`Generated Logs > 3 match on no description, no scope description, no sp
 docs() : 
      ↑↑ ↑
      ┆┆ ┆
-     ┆┆ ╵--- The commit message has an empty description.
+     ┆┆ ╵--- Missing or empty commit description.
      ┆┆
-     ┆╵--- The commit message should not have spaces before the colon.
+     ┆╵--- Remove spaces before the colon in the commit message.
      ┆
-     ╵--- The commit message has an empty scope.
+     ╵--- Empty commit scope provided.
 
 "
 `;
@@ -51,13 +51,13 @@ exports[`Generated Logs > 4 match on no description, no scope description, no sp
 docs () : 
     ↑ ↑↑ ↑
     ┆ ┆┆ ┆
-    ┆ ┆┆ ╵--- The commit message has an empty description.
+    ┆ ┆┆ ╵--- Missing or empty commit description.
     ┆ ┆┆
-    ┆ ┆╵--- The commit message should not have spaces before the colon.
+    ┆ ┆╵--- Remove spaces before the colon in the commit message.
     ┆ ┆
-    ┆ ╵--- The commit message has an empty scope.
+    ┆ ╵--- Empty commit scope provided.
     ┆
-    ╵--- The commit message should not have a space between the type and the scope.
+    ╵--- Avoid space between commit type and scope.
 
 "
 `;
@@ -67,9 +67,9 @@ exports[`Generated Logs > with match on the same position 1`] = `
 docs:
      ↑
      ┆
-     ┆--- The commit message has an empty description.
+     ┆--- Missing or empty commit description.
      ┆
-     ╵--- The commit message should have a space after the colon.
+     ╵--- Space after the colon is required.
 
 "
 `;
@@ -79,15 +79,15 @@ exports[`Generated Logs > with match on the same position 2`] = `
 docsfoo()foo:
      ↑  ↑ ↑  ↑
      ┆  ┆ ┆  ┆
-     ┆  ┆ ┆  ┆--- The commit message has an empty description.
+     ┆  ┆ ┆  ┆--- Missing or empty commit description.
      ┆  ┆ ┆  ┆
-     ┆  ┆ ┆  ╵--- The commit message should have a space after the colon.
+     ┆  ┆ ┆  ╵--- Space after the colon is required.
      ┆  ┆ ┆
-     ┆  ┆ ╵--- The commit message contains an invalid character before the colon.
+     ┆  ┆ ╵--- Invalid character before the colon in the commit message.
      ┆  ┆
-     ┆  ╵--- The commit message has an empty scope.
+     ┆  ╵--- Empty commit scope provided.
      ┆
-     ╵--- The commit message contains an invalid character between the type and the scope.
+     ╵--- Unexpected character between commit type and scope.
 
 "
 `;
