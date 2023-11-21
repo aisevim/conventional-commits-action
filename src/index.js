@@ -20,7 +20,6 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'));
     const hasTitlePR = core.getInput('has-pr-title')
     const hasCommits = core.getInput('has-commits')
-    const onTitleChange = github.context.payload.changes?.title && hasTitlePR
     let page = 1
     let text = ''
 
@@ -28,7 +27,7 @@ async function run() {
     console.log('hasTitlePR', hasTitlePR)
     console.log('title', github.context.payload.changes?.title)
 
-    if (onActions && onTitleChange) {
+    if (onActions && hasTitlePR) {
       text = github.context.payload.pull_request?.title ?? ''
       console.log(text)
       generateLog(text, 'pr-title')
