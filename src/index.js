@@ -29,6 +29,7 @@ async function run() {
       return commits
     }
 
+    console.log(github.context.eventName)
 
     if (github.context.eventName === 'pull_request') {
       const commitsInfo = await getCommits(page)
