@@ -3,43 +3,82 @@ import github from "@actions/github"
 
 import { checkCommitMessages } from "./checker.js"
 
+const maxCommitsPerPage = 100
+
 async function run() {
+  const onActions = (
+    github.context.payload.action === 'edited' ||
+    github.context.payload.action === 'opened' ||
+    github.context.payload.action === 'synchronize' ||
+    github.context.payload.action === 'reopened'
+  )
+  if (github.context.eventName !== 'pull_request' || !onActions) {
+    return
+  }
+
   try {
-    const octokit = github.getOctokit(core.getInput('github-token')); // Tu dois fournir un token d'accès GitHub
-    const maxCommitsPerPage = 100
+    const octokit = github.getOctokit(core.getInput('github-token'));
+    const hasTitlePR = core.getInput('has-pr-title')
+    const hasCommits = core.getInput('has-commits')
+    let logs = []
     let page = 1
-    let commits = []
+    let text = ''
 
-    async function getCommits(page) {
-      const commitsInfo = await octokit.rest.pulls.listCommits({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        pull_number: github.context.payload.pull_request?.number,
-        per_page: maxCommitsPerPage,
-        page
-      });
-
-      commits.push(...commitsInfo.data)
-
-      if (commitsInfo.length === maxCommitsPerPage) {
-        page++
-        commits.push(...(await getCommits(page)))
-      }
-
-      return commits
+    if (onActions && hasTitlePR) {
+      text = github.context.payload.pull_request?.title ?? ''
+      logs.push({text, type: 'pr-title'})
     }
 
-
-    if (github.context.eventName === 'pull_request') {
-      const commitsInfo = await getCommits(page)
+    if (onActions && hasCommits) {
+      const commitsInfo = await getCommits(octokit, page)
       const commitInfo = commitsInfo?.at(-1)
-      const commitMessage = commitInfo?.commit?.message
-      const [isCommitInvalid, log] = checkCommitMessages(commitMessage)
+      text = commitInfo?.commit?.message ?? ''
+      logs.push({text, type: 'pr-commit'})
+    }
 
-      if (commitMessage && isCommitInvalid) {
-        core.setFailed('The commit message does not adhere to the expected format.');
-        core.warning(`${log}`);
-        core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
+    generateLog(logs)
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+async function getCommits(octokit, page) {
+  let commits = []
+  
+  const commitsInfo = await octokit.rest.pulls.listCommits({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    pull_number: github.context.payload.pull_request?.number,
+    per_page: maxCommitsPerPage,
+    page
+  });
+
+  commits.push(...commitsInfo.data)
+
+  if (commitsInfo.length === maxCommitsPerPage) {
+    page++
+    commits.push(...(await getCommits(page)))
+  }
+
+  return commits
+}
+
+function generateLog(_logs) {
+  let hasError = false
+
+  _logs.forEach(({text, type}) => {
+    const [isCommitInvalid, log] = checkCommitMessages(text)
+    const logType = type === 'pr-title' ? 'PR title' : 'commit message'
+
+    if (isCommitInvalid) {
+      core.setFailed(`The ${logType} does not adhere to the expected format.`);
+      core.info(log);
+      hasError = true
+    }
+  })
+
+  if (hasError) {
+    core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
 
 The structure of a Conventional Commit message typically follows this format:
 <type>(<scope>): <description>
@@ -52,11 +91,6 @@ The structure of a Conventional Commit message typically follows this format:
 <description>: Briefly explains the change introduced in the commit.
 <body> (optional): Provides additional context, details, or reasoning behind the change.
 <footer> (optional): Includes information like issue tracker references or breaking changes.`);
-      }
-    }
-
-  } catch (error) {
-    core.setFailed(error.message);
   }
 }
 

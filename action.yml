@@ -6,6 +6,14 @@ inputs:
     description: 'GitHub token'
     required: true
 
+  has-commits:
+    description: 'Check commits'
+    default: true
+
+  has-pr-title:
+    description: 'Check PR title'
+    default: true
+
 runs:
   using: node20
   main: src/index.js
