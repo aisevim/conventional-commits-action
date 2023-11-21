@@ -18,15 +18,17 @@ async function run() {
 
   try {
     const octokit = github.getOctokit(core.getInput('github-token'));
-    const hasTitlePR = core.getInput('has-title-pr')
+    const hasTitlePR = core.getInput('has-pr-title')
     const hasCommits = core.getInput('has-commits')
+    const onTitleChange = github.context.payload.changes?.title && hasTitlePR
     let page = 1
     let text = ''
 
-    console.log('action', github.context.payload.action)
+    console.log('onActions', onActions)
     console.log('hasTitlePR', hasTitlePR)
     console.log('title', github.context.payload.changes?.title)
-    if (onActions && hasTitlePR) {
+
+    if (onActions && onTitleChange) {
       text = github.context.payload.pull_request?.title ?? ''
       console.log(text)
       generateLog(text, 'pr-title')
@@ -66,8 +68,6 @@ async function getCommits(octokit, page) {
 
 function generateLog(text, type) {
   const [isCommitInvalid, log] = checkCommitMessages(text)
-  console.log('isCommitInvalid', isCommitInvalid)
-  console.log('log', log)
   const logType = type === 'pr-title' ? 'PR title' : 'commit message'
 
   if (isCommitInvalid) {
