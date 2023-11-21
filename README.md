@@ -1,6 +1,6 @@
-# Conventional Commit Checker
+# Commit Harmonizer
 
-This GitHub Action verifies commit messages and PR titles against the conventional commit format.
+This GitHub Action verifies commit messages and PR titles against the *Conventional Commit* format.
 
 ## Inputs
 
@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/conventional-commit-checker@v1
+        uses: aisevim/commit-harmonizer-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/conventional-commit-checker@v1
+        uses: aisevim/commit-harmonizer-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           has-commits: false
@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/conventional-commit-checker@v1
+        uses: aisevim/commit-harmonizer-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           has-pr-title: false

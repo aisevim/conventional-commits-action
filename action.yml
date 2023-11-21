@@ -1,5 +1,5 @@
-name: Conventional Commit Checker
-description: Checks commit messages against conventional commit format
+name: Commit Harmonizer
+description: Checks commit messages against Conventional Commit format
 author: aisevim
 
 inputs:
