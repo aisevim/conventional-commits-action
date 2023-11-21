@@ -39,9 +39,9 @@ async function run() {
         const commitInfo = commitsInfo?.at(-1)
         text = commitInfo?.commit?.message
       }
-      const [isCommitInvalid, log] = checkCommitMessages(commitMessage)
+      const [isCommitInvalid, log] = checkCommitMessages(text)
 
-      if (commitMessage && isCommitInvalid) {
+      if (text && isCommitInvalid) {
         core.setFailed('The commit message does not adhere to the expected format.');
         core.warning(log);
         core.info(`Conventional Commits provide a standardized format for commit messages, enabling better collaboration among developers, automating the release process, and generating comprehensive changelogs.
