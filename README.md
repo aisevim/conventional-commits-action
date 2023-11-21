@@ -17,6 +17,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+
 jobs:
   check-commit:
     runs-on: ubuntu-latest
