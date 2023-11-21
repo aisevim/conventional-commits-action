@@ -12,7 +12,7 @@ This GitHub Action verifies commit messages and PR titles against the convention
 
 ## Usage
 
-### On PR Open, Edit, or Sync and Last Commit
+### On PR Open and Last Commit
 
 ```yaml
 name: Pull Request Message Checker

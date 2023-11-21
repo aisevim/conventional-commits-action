@@ -1,29 +1,36 @@
 {
   "name": "conventional-commits-action",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "GitHub Action verifies commit messages and PR titles against the conventional commit format.",
   "author": "aisevim <a.aydnlp.pro@gmail.com",
+  "private": true,
   "type": "module",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./dist/index.js"
+  },
+  "volta": {
+    "node": "20.9.0"
   },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "build": "ncc build src/index.js --minify --license licenses.txt"
   },
-  "keywords": [],
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "conventional-commits",
+    "conventional commits"
+  ],
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0"
   },
-  "volta": {
-    "node": "20.9.0"
-  },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
     "vitest": "^0.34.6"
   }
 }
