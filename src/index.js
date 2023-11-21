@@ -1,6 +1,8 @@
 import core from "@actions/core"
 import github from "@actions/github"
 
+import { checkCommitMessages } from "./checkCommitMessages"
+
 async function run() {
   try {
     const octokit = github.getOctokit(core.getInput('github-token')); // Tu dois fournir un token d'accès GitHub
@@ -32,17 +34,11 @@ async function run() {
       const commitsInfo = await getCommits(page)
       const commitInfo = commitsInfo?.at(-1)
       const commitMessage = commitInfo?.commit?.message
+      const [isCommitInvalid, log] = checkCommitMessages(commitMessage)
 
-      if (commitMessage && !commitRegex.test(commitMessage)) {
+      if (commitMessage && isCommitInvalid) {
         core.setFailed('The commit message does not adhere to the expected format.');
-        core.warning(`The commit message should have the format:
-        <type> [<optional scope>]: <description>
-
-        [<optional body>]
-
-        [<optional footer>]
-        `);
-        core.notice(`commit => ${commitMessage}`)
+        core.warning(log);
       }
     }
 
