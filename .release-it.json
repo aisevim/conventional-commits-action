@@ -7,15 +7,15 @@
   },
   "github": {
     "release": true,
-		"releaseName": "Release v${version}"
+    "releaseName": "Release v${version}"
   },
-  "@release-it/conventional-changelog": {
-    "preset": {
-      "name": "angular"
-    },
-    "infile": "CHANGELOG.md"
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
+    }
   },
-	"hooks": {
+  "hooks": {
     "before:init": ["npm run test:unit:prod"],
     "after:bump": "npm run build",
     "after:git:release": "echo After git push, before github release",
