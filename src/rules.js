@@ -55,8 +55,8 @@ export const rulesConfig = [
     errorMessage: 'Avoid space between commit type and scope.'
   },
   {
-    id: 'CharacterBetweenTypeAndScope',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>\S+)(?:(?:\([-A-Za-z0-9_ ]+\))|(\(\)))(?:.+)?:(?:\s)?(.+)?/d,
-    errorMessage: 'Unexpected character between commit type and scope.'
+    id: 'CharacterBetweenTypeAndColon',
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?!(?:.*)(\([-A-Za-z0-9_ ]+\)|\(\)))(?:!?|!?(?<position>.+)):(?:.+)?/d,
+    errorMessage: 'Unexpected character between commit type and colon.'
   },
 ];
