@@ -1,4 +1,6 @@
+# Commit Harmonizer Changelog
 
+## [0.1.1](https://github.com/aisevim/conventional-commits-action/compare/0.1.0...0.1.1) (2023-11-22)
 
 # 0.1.0 (2023-11-22)
 
