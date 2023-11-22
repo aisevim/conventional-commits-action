@@ -1,6 +1,9 @@
 name: Commit Harmonizer
 description: Checks commit messages against Conventional Commit format
 author: aisevim
+branding:
+  icon: align-center
+  color: gray-dark
 
 inputs:
   github-token:
