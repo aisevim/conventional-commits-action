@@ -84,6 +84,7 @@ The structure of a Conventional Commit message typically follows this format:
 <type>(<scope>): <description>
 
 <body>
+
 <footer>
 
 <type>: Describes the kind of change introduced (e.g., feat for a new feature, fix for a bug fix).
