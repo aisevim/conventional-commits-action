@@ -1,5 +1,12 @@
 # Commit Harmonizer Changelog
 
+## [0.1.2](https://github.com/aisevim/conventional-commits-action/compare/0.1.1...0.1.2) (2023-11-22)
+
+
+### Bug Fixes
+
+* **action:** add branding for marketplace ([30d922e](https://github.com/aisevim/conventional-commits-action/commit/30d922e7e97c67a2194b371775ad41f63e46ebb8))
+
 ## [0.1.1](https://github.com/aisevim/conventional-commits-action/compare/0.1.0...0.1.1) (2023-11-22)
 
 # 0.1.0 (2023-11-22)
