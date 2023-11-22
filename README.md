@@ -89,7 +89,7 @@ jobs:
 feat() : new feature
      ↑↑
      ┆┆
-     ┆╵--- Remove spaces before the colon in the commit message.
+     ┆╵--- Unexpected character before the colon in the commit message.
      ┆
      ╵--- Empty commit scope provided.
 ```
@@ -105,7 +105,7 @@ feat ():
     ┆ ┆
     ┆ ╵--- Empty commit scope provided.
     ┆
-    ╵--- Avoid space between commit type and scope.
+    ╵--- Unexpected character between commit type and scope.
 ```
 
 `fzeat (): new feat`
@@ -119,3 +119,8 @@ fzeat (): new feat
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+
+## Release Notes
+
+See [CHANGELOG.md](CHANGELOG.md) for details on each release.
