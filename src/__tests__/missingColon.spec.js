@@ -12,7 +12,7 @@ describe('Missing Colon', () => {
     expect("".match(regexMissingColon)?.groups?.position).toBeUndefined()
     expect(":".match(regexMissingColon)?.groups?.position).toBeUndefined()
   })
-  
+
   test("match", () => {
     expect("Update documentation".match(regexMissingColon)?.groups?.position).toBe('')
     expect("docs documentation".match(regexMissingColon)?.groups?.position).toBe('')
@@ -20,6 +20,7 @@ describe('Missing Colon', () => {
     expect("docs(foo) documentation".match(regexMissingColon)?.groups?.position).toBe('')
     expect("docs () documentation".match(regexMissingColon)?.groups?.position).toBe('')
     expect("docs (foo) documentation".match(regexMissingColon)?.groups?.position).toBe('')
+
     expect(" ".match(regexMissingColon)?.groups?.position).toBe('')
   })
 })

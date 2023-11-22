@@ -3,33 +3,40 @@ import { checkCommitMessages } from '../checker'
 
 describe('Generated Logs', () => {
   test("1 match on no description", () => {
-		const [, log] = checkCommitMessages(`docs: `);
+		const [, log] = checkCommitMessages(`docs : Update documentation`);
 		expect(log).toMatchSnapshot()
-
-		const [, log2] = checkCommitMessages(` docs: `);
-		expect(log2).toMatchSnapshot()
   })
 
-	test("2 match on no description, no scope description", () => {
+	test("2 match on no description", () => {
 		const [, log] = checkCommitMessages(`docs(): `);
 		expect(log).toMatchSnapshot()
   })
 
-	test("3 match on no description, no scope description, no space before scope and colon", () => {
+	test("3 match on no description", () => {
 		const [, log] = checkCommitMessages(`docs() : `);
 		expect(log).toMatchSnapshot()
   })
 
-	test("4 match on no description, no scope description, no space before scope and colon, no space after type and before scope", () => {
+	test("4 match on no description", () => {
 		const [, log] = checkCommitMessages(`docs () : `);
 		expect(log).toMatchSnapshot()
   })
 
-	test("with match on the same position", () => {
-		const [, log] = checkCommitMessages(`docs:`);
+	test("5 match on no description", () => {
+		const [, log] = checkCommitMessages(`docs () : `);
+		expect(log).toMatchSnapshot()
+  })
+
+	test("colon missing", () => {
+		const [, log] = checkCommitMessages(`Update documentation`);
+		expect(log).toMatchSnapshot()
+  })
+
+	test("space before", () => {
+		const [, log] = checkCommitMessages(` docs: Update documentation`);
 		expect(log).toMatchSnapshot()
 
-		const [, log2] = checkCommitMessages(`docsfoo()foo:`);
+		const [, log2] = checkCommitMessages(` docs:`);
 		expect(log2).toMatchSnapshot()
   })
 })

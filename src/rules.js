@@ -35,24 +35,19 @@ export const rulesConfig = [
     errorMessage: 'Unrecognized commit type used.',
   },
   {
-    id: 'SpaceAfterScopeBeforeColon',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))!?)(?<position>(?:\s+)(?:\!)?(?:\s+)?):(?:\s)?(?:.+)?/d,
-    errorMessage: 'Remove spaces before the colon in the commit message.',
-  },
-  {
     id: 'CharacterAfterScopeBeforeColon',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:\!)?)(?!\!)(?<position>\S+):(?:\s)?(.+)?/d,
-    errorMessage: 'Invalid character before the colon in the commit message.',
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:\!)?)(?<position>.+)?:(.+)?/d,
+    errorMessage: 'Unexpected character before the colon in the commit message.',
   },
   {
     id: 'EmptyScope',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?<position>\(\))(?:(?:.+)?\!)?(?:.+)?:(?:\s)?(.+)?/d,
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?<position>\(\))(?:(?:.+)?\!)?(?:.+)?:(.+)?/d,
     errorMessage: 'Empty commit scope provided.'
   },
   {
-    id: 'SpaceBetweenTypeAndScope',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>\s+)(?:(?:\([-A-Za-z0-9_ ]+\))|(\(\)))(?:.+)?:(?:\s)?(.+)?/d,
-    errorMessage: 'Avoid space between commit type and scope.'
+    id: 'CharacterBetweenTypeAndScope',
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>.+)(?:(?:\([-A-Za-z0-9_ ]*\))|(\(\)))(.+)?:(.+)?/d,
+    errorMessage: 'Unexpected character between commit type and scope.'
   },
   {
     id: 'CharacterBetweenTypeAndColon',

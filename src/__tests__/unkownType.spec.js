@@ -40,6 +40,8 @@ describe('Unkown type', () => {
     expect("docs ! : ".match(regexUnknownType)?.groups?.position).toBeUndefined()
     expect("docs(foo): ".match(regexUnknownType)?.groups?.position).toBeUndefined()
     expect("docs(foo)!: ".match(regexUnknownType)?.groups?.position).toBeUndefined()
+
+    expect("".match(regexUnknownType)?.groups?.position).toBeUndefined()
   })
   
   test("match", () => {
