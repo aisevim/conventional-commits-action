@@ -5,6 +5,11 @@ export const rulesConfig = [
     errorMessage: 'Empty commit message.',
   },
   {
+    id: 'OnlyColon',
+    regex: /^(?<position>:)$/d,
+    errorMessage: 'Missing commit type and description.',
+  },
+  {
     id: 'EmptyDescription',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:\((?:[-A-Za-z0-9_ ]+|)\))?!?:(?<position>(?:\s+)?)$/d,
     errorMessage: 'Missing or empty commit description.'
