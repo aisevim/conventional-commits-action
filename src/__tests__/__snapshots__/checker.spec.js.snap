@@ -54,10 +54,12 @@ docs () :
 
 exports[`Generated Logs > 5 match on no description 1`] = `
 "
-docs () : 
+docs () :
     ↑ ↑↑ ↑
     ┆ ┆┆ ┆
-    ┆ ┆┆ ╵--- Missing or empty commit description.
+    ┆ ┆┆ ┆--- Missing or empty commit description.
+    ┆ ┆┆ ┆
+    ┆ ┆┆ ╵--- Space after the colon is required.
     ┆ ┆┆
     ┆ ┆╵--- Unexpected character before the colon in the commit message.
     ┆ ┆

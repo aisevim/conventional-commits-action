@@ -23,7 +23,7 @@ describe('Generated Logs', () => {
   })
 
 	test("5 match on no description", () => {
-		const [, log] = checkCommitMessages(`docs () : `);
+		const [, log] = checkCommitMessages(`docs () :`);
 		expect(log).toMatchSnapshot()
   })
 
