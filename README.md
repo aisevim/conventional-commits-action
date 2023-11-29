@@ -12,7 +12,7 @@ This GitHub Action verifies commit messages and PR titles against the *Conventio
 
 ## Usage
 
-### On PR Open and Last Commit
+### On PR Title Edit and Last Commit Change
 
 ```yaml
 name: Pull Request Message Checker
