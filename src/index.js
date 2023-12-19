@@ -24,12 +24,12 @@ async function run() {
     const page = 1
     let text = ''
 
-    if (onActions && hasTitlePR) {
+    if (hasTitlePR) {
       text = github.context.payload.pull_request?.title ?? ''
       logs.push({ text, type: 'pr-title' })
     }
 
-    if (onActions && hasCommits) {
+    if (hasCommits) {
       const commitsInfo = await getCommits(octokit, page)
       const commitInfo = commitsInfo?.at(-1)
       text = commitInfo?.commit?.message ?? ''
