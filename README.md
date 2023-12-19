@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/commit-harmonizer-action@v1
+        uses: aisevim/commit-harmonizer-action@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/commit-harmonizer-action@v1
+        uses: aisevim/commit-harmonizer-action@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           has-commits: false
@@ -84,7 +84,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Commit Message
-        uses: aisevim/commit-harmonizer-action@v1
+        uses: aisevim/commit-harmonizer-action@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           has-pr-title: false
