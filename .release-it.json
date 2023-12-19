@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "before:init": ["npm run test:prod"],
+    "before:init": ["npm run test:ci"],
     "after:bump": "npm run build",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },

@@ -1,4 +1,4 @@
-name: Pull Request Message Checker
+name: Commit Checker
 
 on:
   pull_request:
