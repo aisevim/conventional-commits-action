@@ -45,13 +45,6 @@ describe('No space before the commit', () => {
       expect('docs(foo)!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
       expect('docs(): Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
       expect('docs()!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-
-      expect(' foodocs: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-      expect(' foodocs!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-      expect(' foodocs(foo): Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-      expect(' foodocs(foo)!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-      expect(' foodocs(): Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
-      expect(' foodocs()!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBeUndefined()
     })
   })
 
@@ -63,6 +56,20 @@ describe('No space before the commit', () => {
     expect(' docs()!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
     expect(' docs(foo):'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
     expect(' docs(foo)!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+
+    expect(' foo:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' foo!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' foo():'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' foo()!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' foo(foo):'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' foo(foo)!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+
+    expect(' :'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' !:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' ():'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' ()!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' (foo):'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
+    expect(' (foo)!:'.match(regexLeadingTrailingSpace)?.groups?.position).toBe(' ')
 
     expect('     docs(foo): Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBe('     ')
     expect('     docs(foo)!: Update documentation'.match(regexLeadingTrailingSpace)?.groups?.position).toBe('     ')

@@ -25,14 +25,14 @@ export const rulesConfig = [
     errorMessage: 'Space after the colon is required.',
   },
   {
-    id: 'LeadingTrailingSpace',
-    regex: /^(?<position>\s+)(?:chore|docs|feat|fix|perf|refactor|style|test)(.+)?:(.+)?/d,
-    errorMessage: 'Avoid leading or trailing spaces in the commit message.',
-  },
-  {
     id: 'UnknownType',
     regex: /^(?!(?:chore|docs|feat|fix|perf|refactor|style|test))(\s+)?\b(?!(?:chore|docs|feat|fix|perf|refactor|style|test)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/d,
     errorMessage: 'Unrecognized commit type used.',
+  },
+  {
+    id: 'LeadingTrailingSpace',
+    regex: /^(?<position>\s+)(.+)?:(.+)?/d,
+    errorMessage: 'Avoid leading or trailing spaces in the commit message.',
   },
   {
     id: 'CharacterAfterScopeBeforeColon',
