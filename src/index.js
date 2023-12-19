@@ -20,6 +20,7 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'))
     const hasTitlePR = core.getInput('has-pr-title')
     const hasCommits = core.getInput('has-commits')
+    const colorLevel = core.getInput('color-level')
     const logs = []
     const page = 1
     let text = ''
@@ -36,7 +37,7 @@ async function run() {
       logs.push({ text, type: 'pr-commit' })
     }
 
-    generateLog(logs)
+    generateLog(logs, colorLevel)
   } catch (error) {
     core.setFailed(error.message)
   }
@@ -63,11 +64,11 @@ async function getCommits(octokit, page) {
   return commits
 }
 
-function generateLog(_logs) {
+function generateLog(_logs, colorLevel) {
   let hasError = false
 
   _logs.forEach(({ text, type }) => {
-    const [isCommitInvalid, log] = checkCommitMessages(text)
+    const [isCommitInvalid, log] = checkCommitMessages(text, colorLevel)
     const logType = type === 'pr-title' ? 'PR title' : 'commit message'
 
     if (isCommitInvalid) {

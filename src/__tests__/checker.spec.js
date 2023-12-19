@@ -105,6 +105,30 @@ describe('Generated Logs with multiple errors', () => {
   })
 })
 
+describe('Generate Logs with colors/style', () => {
+  test('Should return 5 errors in colors', () => {
+    const [, log] = checkCommitMessages(`docs () :`, 1)
+    expect(log).toMatchInlineSnapshot(`
+      "
+      docs[2m[3m[4m[36m [39m[24m[23m[22m[2m[3m[4m[35m([39m[24m[23m[22m[2m[3m[4m[35m)[39m[24m[23m[22m[2m[3m[4m[33m [39m[24m[23m[22m:
+          [36m↑[39m [35m↑[39m[33m↑[39m [37m↑[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m[37m-[39m[37m-[39m[37m-[39m [37mMissing or empty commit description.[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m [37m╵[39m[37m-[39m[37m-[39m[37m-[39m [37mSpace after the colon is required.[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m
+          [36m┆[39m [35m┆[39m[33m╵[39m[33m-[39m[33m-[39m[33m-[39m [33mUnexpected character before the colon in the commit message.[39m
+          [36m┆[39m [35m┆[39m
+          [36m┆[39m [35m╵[39m[35m-[39m[35m-[39m[35m-[39m [35mEmpty commit scope provided.[39m
+          [36m┆[39m
+          [36m╵[39m[36m-[39m[36m-[39m[36m-[39m [36mUnexpected character between commit type and scope.[39m
+
+      "
+    `)
+  })
+})
+
+
 describe.concurrent('Return programticly boolean to know de commit validation', () => {
   test.concurrent('Should return `true` when commit is invalid', () => {
     const [hasError] = checkCommitMessages(`docs: `)
