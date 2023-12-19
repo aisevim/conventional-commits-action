@@ -1,43 +1,59 @@
 import { expect, test, describe } from 'vitest'
 
+import { checkCommitMessages } from '../checker'
 import { rulesConfig } from '../rules'
 
 const regexCharacterBetweenTypeAndScope = rulesConfig.find(rule => rule.id === 'CharacterBetweenTypeAndScope')?.regex
 
-describe.concurrent('Character Between Type And Scope', () => {
-  test.concurrent('not', () => {
-    expect('Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs() documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(foo) documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs () documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs (foo) documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+describe('Characters between type and scope are not allowed', () => {
+  test('Should generate a valid Output, with the arrow centered on the invalid characters', () => {
+    const [, log] = checkCommitMessages(`feat asd  (foo): some feat`)
+    expect(log).toMatchInlineSnapshot(`
+      "
+      feat asd  (foo): some feat
+             ↑
+             ┆
+             ╵--- Unexpected character between commit type and scope.
 
-    expect('docs: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(foo)!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs()!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-
-    expect(' docs: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect(' docs!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect(' docs (foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect(' docs (foo)!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect(' docs (): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect(' docs ()!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-
-    expect('docs:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(foo):'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs(foo)!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs():'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-    expect('docs()!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
-
-    expect(''.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      "
+    `)
   })
 
-  test.concurrent('match', () => {
+  describe.concurrent('Some cases are deliberately ignored to anticipate a possible problem in the rendering.', () => {
+    test.concurrent('Should not match', () => {
+      expect('Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs() documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(foo) documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs () documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs (foo) documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+
+      expect('docs: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(foo)!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs()!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+
+      expect(' docs: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect(' docs!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect(' docs (foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect(' docs (foo)!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect(' docs (): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect(' docs ()!: Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+
+      expect('docs:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(foo):'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs(foo)!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs():'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+      expect('docs()!:'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+
+      expect(''.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBeUndefined()
+    })
+  })
+
+  test.concurrent('Get the unexpected characters', () => {
     expect('docs (foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBe(' ')
     expect('docsfoo(foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBe('foo')
     expect('docs  foo  (foo): Update documentation'.match(regexCharacterBetweenTypeAndScope)?.groups?.position).toBe('  foo  ')

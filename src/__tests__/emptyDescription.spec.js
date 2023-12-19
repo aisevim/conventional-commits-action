@@ -1,65 +1,89 @@
 import { expect, test, describe } from 'vitest'
 
+import { checkCommitMessages } from '../checker'
 import { rulesConfig } from '../rules'
 
 const regexEmptyDescription = rulesConfig.find(rule => rule.id === 'EmptyDescription')?.regex
 
-describe.concurrent('Empty Description', () => {
-  test.concurrent('not', () => {
-    expect('Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs() documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs(foo) documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs () documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs (foo) documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+describe('A description is required after the space (<= after the scope)', () => {
+  test('Should generate a valid Output, the arrow is positioned after colon', () => {
+    const [, log] = checkCommitMessages(`feat: `)
+    expect(log).toMatchInlineSnapshot(`
+      "
+      feat: 
+           ↑
+           ┆
+           ╵--- Missing or empty commit description.
 
-    expect('docs: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs! : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs! foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-
-    expect('docs(): Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs(): Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs() : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs() foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs()!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs()!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs()! : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
-    expect('docs()! foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      "
+    `)
   })
 
-  test.concurrent('match', () => {
-    expect('docs:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs():'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs() :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs() foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo):'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo) :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo) foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+  describe.concurrent('Some cases are deliberately ignored to anticipate a possible problem in the rendering.', () => {
+    test.concurrent('Should not match', () => {
+      // Deliberately ignored
+      expect(':'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect(''.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
 
-    expect('docs!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs()!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs() !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs() foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo)!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo) !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo) foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      // Need to be ignored
+      expect('Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs() documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs(foo) documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs () documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs (foo) documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
 
-    expect('docs! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs()!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs()! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs()! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo)!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo)! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
-    expect('docs(foo)! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs! : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs! foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+
+      expect('docs(): Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs(): Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs() : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs() foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs()!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs()!: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs()! : Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+      expect('docs()! foo: Update documentation'.match(regexEmptyDescription)?.groups?.position).toBeUndefined()
+    })
+  })
+
+
+  describe.concurrent('Support the match when a space is not exist', () => {
+    test.concurrent('Should match', () => {
+      expect('docs:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs():'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs() :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs() foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo):'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo) :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo) foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+
+      expect('docs!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs()!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs() !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs() foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo)!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo) !:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo) foo!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+
+      expect('docs! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs()!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs()! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs()! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo)!:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo)! :'.match(regexEmptyDescription)?.groups?.position).toBe('')
+      expect('docs(foo)! foo:'.match(regexEmptyDescription)?.groups?.position).toBe('')
+    })
   })
 })
