@@ -2,13 +2,9 @@
   "name": "commit-harmonizer-action",
   "version": "0.2.0",
   "description": "Commit Harmonizer verifies commit messages and PR titles against the conventional commit format.",
-  "author": "aisevim <a.aydnlp.pro@gmail.com",
   "private": true,
-  "type": "module",
   "license": "MIT",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "author": "aisevim <a.aydnlp.pro@gmail.com",
   "volta": {
     "node": "20.9.0"
   },
@@ -19,9 +15,15 @@
     "conventional commits",
     "Commit Harmonizer"
   ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
-    "test:unit": "vitest",
-    "test:unit:ci": "vitest run",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
     "build": "ncc build src/index.js --minify --license licenses.txt",
     "release": "dotenv release-it"
   },
@@ -33,6 +35,8 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@vercel/ncc": "^0.38.1",
     "dotenv-cli": "^7.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-symmetrys": "^0.8.1",
     "release-it": "^17.0.0",
     "vitest": "^0.34.6"
   }

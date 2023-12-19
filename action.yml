@@ -7,15 +7,15 @@ branding:
 
 inputs:
   github-token:
-    description: 'GitHub token'
+    description: "GitHub token"
     required: true
 
   has-commits:
-    description: 'Check commits'
+    description: "Check commits"
     default: true
 
   has-pr-title:
-    description: 'Check PR title'
+    description: "Check PR title"
     default: true
 
 runs:

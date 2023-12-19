@@ -1,10 +1,15 @@
 {
+  "hooks": {
+    "before:init": ["npm run test:prod"],
+    "after:bump": "npm run build",
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
   "git": {
     "commitMessage": "chore: release v${version}",
-    "tagAnnotation": "Release v${version}",
-    "tagName": "v${version}",
+    "requireBranch": "master",
     "requireCleanWorkingDir": false,
-    "requireBranch": "master"
+    "tagAnnotation": "Release v${version}",
+    "tagName": "v${version}"
   },
   "github": {
     "release": true,
@@ -16,11 +21,5 @@
       "infile": "CHANGELOG.md",
       "header": "# Commit Harmonizer Changelog"
     }
-  },
-  "hooks": {
-    "before:init": ["npm run test:unit:prod"],
-    "after:bump": "npm run build",
-    "after:git:release": "echo After git push, before github release",
-    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   }
 }

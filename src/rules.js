@@ -12,7 +12,7 @@ export const rulesConfig = [
   {
     id: 'EmptyDescription',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:\((?:[-A-Za-z0-9_ ]+|)\))?!?:(?<position>(?:\s+)?)$/d,
-    errorMessage: 'Missing or empty commit description.'
+    errorMessage: 'Missing or empty commit description.',
   },
   {
     id: 'MissingColon',
@@ -36,22 +36,22 @@ export const rulesConfig = [
   },
   {
     id: 'CharacterAfterScopeBeforeColon',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:\!)?)(?<position>.+)?:(.+)?/d,
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:!)?)(?<position>.+)?:(.+)?/d,
     errorMessage: 'Unexpected character before the colon in the commit message.',
   },
   {
     id: 'EmptyScope',
-    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?<position>\(\))(?:(?:.+)?\!)?(?:.+)?:(.+)?/d,
-    errorMessage: 'Empty commit scope provided.'
+    regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?:.+)?(?<position>\(\))(?:(?:.+)?!)?(?:.+)?:(.+)?/d,
+    errorMessage: 'Empty commit scope provided.',
   },
   {
     id: 'CharacterBetweenTypeAndScope',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?<position>.+)(?:(?:\([-A-Za-z0-9_ ]*\))|(\(\)))(.+)?:(.+)?/d,
-    errorMessage: 'Unexpected character between commit type and scope.'
+    errorMessage: 'Unexpected character between commit type and scope.',
   },
   {
     id: 'CharacterBetweenTypeAndColon',
     regex: /^(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|release)(?!(?:.*)(\([-A-Za-z0-9_ ]+\)|\(\)))(?:!?|!?(?<position>.+)):(?:.+)?/d,
-    errorMessage: 'Unexpected character between commit type and colon.'
+    errorMessage: 'Unexpected character between commit type and colon.',
   },
-];
+]

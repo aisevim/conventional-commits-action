@@ -19,7 +19,11 @@ name: Pull Request Message Checker
 
 on:
   pull_request:
-    types: [edited, opened, synchronize, reopened]
+    types:
+      - edited
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   check-commit:
@@ -41,7 +45,8 @@ name: Pull Request Title Checker
 
 on:
   pull_request:
-    types: [edited]
+    types:
+      - edited
 
 
 jobs:
@@ -65,7 +70,10 @@ name: Pull Request Commit Message Checker
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 
 jobs:
