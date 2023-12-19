@@ -1,6 +1,6 @@
 {
   "name": "commit-harmonizer-action",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Commit Harmonizer verifies commit messages and PR titles against the conventional commit format.",
   "private": true,
   "license": "MIT",
