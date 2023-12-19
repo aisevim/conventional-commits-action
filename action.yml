@@ -18,6 +18,10 @@ inputs:
     description: "Check PR title"
     default: true
 
+  color-level:
+    description: "Color level, see https://github.com/chalk/chalk?tab=readme-ov-file#supportscolor"
+    default: 0
+
 runs:
   using: node20
   main: dist/index.js

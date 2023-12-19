@@ -1,10 +1,13 @@
+import { Chalk } from 'chalk'
+
 import { rulesConfig } from './rules.js'
+import { replaceTextByPosition } from './utils.js'
 
 function createMatrix(rows, cols) {
   return Array.from({ length: rows }, () => Array.from({ length: cols }, () => ' '))
 }
 
-function applyRuleToMatrix(_matrix, position, errorMessage) {
+function applyRuleToMatrix(_matrix, position, errorMessage, colorLog) {
   const matrix = structuredClone(_matrix)
 
   for (let i = 0; i < matrix.length; i++) {
@@ -12,16 +15,16 @@ function applyRuleToMatrix(_matrix, position, errorMessage) {
     const middlePosition = position[0] + Math.floor((position[1] - position[0]) / 2)
 
     if (i === 0) {
-      line[middlePosition] = '↑'
+      line[middlePosition] = colorLog('↑')
     } else {
-      line[middlePosition] = i + 1 === matrix.length ? '╵' : '┆'
+      line[middlePosition] = colorLog(i + 1 === matrix.length ? '╵' : '┆')
     }
 
     if (i === matrix.length - 1) {
-      line[middlePosition + 1] = '-'
-      line[middlePosition + 2] = '-'
-      line[middlePosition + 3] = '-'
-      line[middlePosition + 5] = errorMessage
+      line[middlePosition + 1] = colorLog('-')
+      line[middlePosition + 2] = colorLog('-')
+      line[middlePosition + 3] = colorLog('-')
+      line[middlePosition + 5] = colorLog(errorMessage)
     }
   }
 
@@ -37,8 +40,11 @@ function hasError(matrix) {
     .replace(/\s+$/g, ''))
 }
 
-export function checkCommitMessages(message) {
-  const msg = message.split('\n')?.[0] || message
+export function checkCommitMessages(message, colorLevel = 0) {
+  const customChalk = new Chalk({ level: colorLevel })
+  const postion = []
+  const commitHeadline = message.split('\n')?.[0]
+  let msg = commitHeadline || message
   const maxLength = msg.length + 10
   let matrix = createMatrix(3, maxLength)
 
@@ -46,12 +52,16 @@ export function checkCommitMessages(message) {
     const match = msg.match(rule.regex)
     const position = match?.indices?.groups?.position
 
-    if (!position) {
-      continue
+    if (position) {
+      matrix = applyRuleToMatrix(matrix, position, rule.errorMessage, customChalk[rule.color])
+      matrix.push(...createMatrix(2, maxLength))
+      postion.push({ color: rule.color, position })
     }
+  }
 
-    matrix = applyRuleToMatrix(matrix, position, rule.errorMessage)
-    matrix.push(...createMatrix(2, maxLength))
+  for (const { color, position } of postion) {
+    const underlineStyle = customChalk.dim.italic.underline[color]
+    msg = replaceTextByPosition(msg, position[0], position[1], underlineStyle)
   }
 
   return [hasError(matrix), `\n${ msg }\n${ formatLog(matrix) }`]
