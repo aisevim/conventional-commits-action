@@ -2,7 +2,7 @@ import { expect, test, describe } from 'vitest'
 
 import { checkCommitMessages } from '../checker'
 
-describe('Generated Logs with multiple errors', () => {
+describe('Generated Logs with only 1 error, focus on priorization', () => {
   test('Should have only 1 error and ignore others when a 1 or more characters is asigned without colon', () => {
     const [, log] = checkCommitMessages(`docs`)
     expect(log).toMatchInlineSnapshot(`
@@ -28,7 +28,10 @@ describe('Generated Logs with multiple errors', () => {
       "
     `)
   })
+})
 
+
+describe('Generated Logs with multiple errors', () => {
   test('Should have 2 errors', () => {
     const [, log] = checkCommitMessages(`docs(): `)
     expect(log).toMatchInlineSnapshot(`

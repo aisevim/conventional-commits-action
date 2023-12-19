@@ -1,5 +1,10 @@
 export const rulesConfig = [
   {
+    id: 'MaxCharacters',
+    regex: /.{50}(?<position>.+)/d,
+    errorMessage: 'The commit message summary be no longer than 50 characters.',
+  },
+  {
     id: 'EmptyCommit',
     regex: /^(?<position>)$/d,
     errorMessage: 'Empty commit message.',
