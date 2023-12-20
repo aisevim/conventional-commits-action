@@ -1,5 +1,17 @@
 # Commit Harmonizer Changelog
 
+# [0.5.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.4.1...v0.5.0) (2023-12-20)
+
+
+### Bug Fixes
+
+* some rules, position in logs ([45dd994](https://github.com/aisevim/commit-harmonizer-action/commit/45dd994c8b07321588ae995b14ffe306d6c776ed))
+
+
+### Features
+
+* create input bypass ([#9](https://github.com/aisevim/commit-harmonizer-action/issues/9)) ([7b4a950](https://github.com/aisevim/commit-harmonizer-action/commit/7b4a950d3ca8079b19f5dd519518239f84099097))
+
 ## [0.4.1](https://github.com/aisevim/commit-harmonizer-action/compare/v0.4.0...v0.4.1) (2023-12-20)
 
 
