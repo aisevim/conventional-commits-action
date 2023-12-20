@@ -39,7 +39,7 @@ describe('Generated Logs with multiple errors', () => {
       docs(): 
            ↑ ↑
            ┆ ┆
-           ┆ ╵--- Missing or empty commit description.
+           ┆ ╵--- Missing commit description.
            ┆
            ╵--- Empty commit scope provided.
 
@@ -54,7 +54,7 @@ describe('Generated Logs with multiple errors', () => {
       docs() : 
            ↑↑ ↑
            ┆┆ ┆
-           ┆┆ ╵--- Missing or empty commit description.
+           ┆┆ ╵--- Missing commit description.
            ┆┆
            ┆╵--- Unexpected character before the colon in the commit message.
            ┆
@@ -71,7 +71,7 @@ describe('Generated Logs with multiple errors', () => {
       docs () : 
           ↑ ↑↑ ↑
           ┆ ┆┆ ┆
-          ┆ ┆┆ ╵--- Missing or empty commit description.
+          ┆ ┆┆ ╵--- Missing commit description.
           ┆ ┆┆
           ┆ ┆╵--- Unexpected character before the colon in the commit message.
           ┆ ┆
@@ -90,7 +90,7 @@ describe('Generated Logs with multiple errors', () => {
       docs () :
           ↑ ↑↑ ↑
           ┆ ┆┆ ┆
-          ┆ ┆┆ ┆--- Missing or empty commit description.
+          ┆ ┆┆ ┆--- Missing commit description.
           ┆ ┆┆ ┆
           ┆ ┆┆ ╵--- Space after the colon is required.
           ┆ ┆┆
@@ -113,7 +113,7 @@ describe('Generate Logs with colors/style', () => {
       docs[2m[3m[4m[36m [39m[24m[23m[22m[2m[3m[4m[35m([39m[24m[23m[22m[2m[3m[4m[35m)[39m[24m[23m[22m[2m[3m[4m[33m [39m[24m[23m[22m:
           [36m↑[39m [35m↑[39m[33m↑[39m [37m↑[39m
           [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m
-          [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m[37m-[39m[37m-[39m[37m-[39m [37mMissing or empty commit description.[39m
+          [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m[37m-[39m[37m-[39m[37m-[39m [37mMissing commit description.[39m
           [36m┆[39m [35m┆[39m[33m┆[39m [37m┆[39m
           [36m┆[39m [35m┆[39m[33m┆[39m [37m╵[39m[37m-[39m[37m-[39m[37m-[39m [37mSpace after the colon is required.[39m
           [36m┆[39m [35m┆[39m[33m┆[39m
