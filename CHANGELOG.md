@@ -1,5 +1,12 @@
 # Commit Harmonizer Changelog
 
+## [0.4.1](https://github.com/aisevim/commit-harmonizer-action/compare/v0.4.0...v0.4.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* missing type commit ([dae19a4](https://github.com/aisevim/commit-harmonizer-action/commit/dae19a4bec57e198e6a2d3f2bc470232d7a536be))
+
 # [0.4.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.3.0...v0.4.0) (2023-12-20)
 
 
