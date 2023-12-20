@@ -7,3 +7,7 @@ export function replaceTextByPosition(text, start, end, colorLog) {
 
   return textArray.join('')
 }
+
+export function ignoreByRegex(array, regex) {
+  return array.filter(({ text }) => !new RegExp(regex).test(text))
+}

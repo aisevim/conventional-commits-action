@@ -18,6 +18,10 @@ inputs:
     description: "Check PR title"
     default: true
 
+  bypass-checks:
+    description: "A regex to bypass checks"
+    default: "^wip|Wip|Merge|Revert|revert"
+
 runs:
   using: node20
   main: dist/index.js

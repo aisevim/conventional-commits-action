@@ -2,6 +2,7 @@ import core from '@actions/core'
 import github from '@actions/github'
 
 import { processCommitMessage } from './commit-log-processor.js'
+import { ignoreByRegex } from './utils.js'
 
 const maxCommitsPerPage = 100
 
@@ -20,6 +21,7 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'))
     const hasTitlePR = core.getInput('check-pr-title')
     const hasCommits = core.getInput('check-commits')
+    const bypass = core.getInput('bypass-checks')
     const logs = []
     const page = 1
     let text = ''
@@ -36,7 +38,7 @@ async function run() {
       logs.push({ text, type: 'pr-commit' })
     }
 
-    generateLog(logs)
+    generateLog(ignoreByRegex(logs, bypass))
   } catch (error) {
     core.setFailed(error.message)
   }
