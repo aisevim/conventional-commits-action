@@ -1,14 +1,15 @@
 # Commit Harmonizer
+[![Tests](https://github.com/aisevim/commit-harmonizer-action/workflows/Tests/badge.svg)](https://github.com/aisevim/commit-harmonizer-action)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/aisevim/commit-harmonizer-action)](https://github.com/aisevim/commit-harmonizer-action/tags)
 
-This GitHub Action verifies commit messages and PR titles against the *Conventional Commit* format.
 
 ## Inputs
 
-| Input           | Description                                   | Required | Default |
-| --------------- | --------------------------------------------  | -------- | ------- |
-| `github-token`  | Token for repository access                   | true     |         |
-| `check-pr-title`  | Enable PR title checking                      | false    | true    |
-| `check-commits`   | Enable last commit message checking           | false    | true    |
+| Input            | Description                         | Required | Default |
+| ---------------- | ----------------------------------- | -------- | ------- |
+| `github-token`   | Token for repository access         | true     |         |
+| `check-pr-title` | Enable PR title checking            | false    | true    |
+| `check-commits`  | Enable last commit message checking | false    | true    |
 
 ## Usage
 
@@ -92,37 +93,13 @@ jobs:
 
 ## Outputs Examples
 
-`feat() : new feature`
-```sh
-feat() : new feature
-     ↑↑
-     ┆┆
-     ┆╵--- Unexpected character before the colon in the commit message.
-     ┆
-     ╵--- Empty commit scope provided.
-```
+![Log example-1](resources/output1.jpg) 
 
-`feat ():`
-```sh
-feat ():
-    ↑ ↑ ↑
-    ┆ ┆ ┆
-    ┆ ┆ ┆--- Missing or empty commit description.
-    ┆ ┆ ┆
-    ┆ ┆ ╵--- Space after the colon is required.
-    ┆ ┆
-    ┆ ╵--- Empty commit scope provided.
-    ┆
-    ╵--- Unexpected character between commit type and scope.
-```
+![Log example-2](resources/output2.jpg) 
 
-`fzeat (): new feat`
-```sh
-fzeat (): new feat
-  ↑
-  ┆
-  ╵--- Unrecognized commit type used.
-```
+![Log example-3](resources/output3.jpg) 
+
+![Log example-4](resources/output4.jpg) 
 
 ## License
 
