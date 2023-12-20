@@ -7,8 +7,8 @@ This GitHub Action verifies commit messages and PR titles against the *Conventio
 | Input           | Description                                   | Required | Default |
 | --------------- | --------------------------------------------  | -------- | ------- |
 | `github-token`  | Token for repository access                   | true     |         |
-| `has-pr-title`  | Enable PR title checking                      | false    | true    |
-| `has-commits`   | Enable last commit message checking           | false    | true    |
+| `check-pr-title`  | Enable PR title checking                      | false    | true    |
+| `check-commits`   | Enable last commit message checking           | false    | true    |
 
 ## Usage
 
@@ -60,7 +60,7 @@ jobs:
         uses: aisevim/commit-harmonizer-action@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          has-commits: false
+          check-commits: false
 ```
 
 ### On Last Commit Change
@@ -87,7 +87,7 @@ jobs:
         uses: aisevim/commit-harmonizer-action@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          has-pr-title: false
+          check-pr-title: false
 ```
 
 ## Outputs Examples

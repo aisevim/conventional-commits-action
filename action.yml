@@ -10,11 +10,11 @@ inputs:
     description: "GitHub token"
     required: true
 
-  has-commits:
+  check-commits:
     description: "Check commits"
     default: true
 
-  has-pr-title:
+  check-pr-title:
     description: "Check PR title"
     default: true
 
