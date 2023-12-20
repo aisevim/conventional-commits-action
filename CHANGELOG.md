@@ -1,5 +1,7 @@
 # Commit Harmonizer Changelog
 
+## [0.5.1](https://github.com/aisevim/commit-harmonizer-action/compare/v0.5.0...v0.5.1) (2023-12-20)
+
 # [0.5.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.4.1...v0.5.0) (2023-12-20)
 
 
