@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexOnlyColon = rulesConfig.find(rule => rule.id === 'OnlyColon')?.regex
 
 describe('Return specific rules when the commit contain only `:` character, ignore all other cases', () => {
   test('Should generate a valid Output', () => {
-    const [, log] = checkCommitMessages(`:`)
+    const [, log] = processCommitMessage(`:`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       :

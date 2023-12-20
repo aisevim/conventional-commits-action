@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexEmptyDescription = rulesConfig.find(rule => rule.id === 'EmptyDescription')?.regex
 
 describe('A description is required after the space (<= after the scope)', () => {
   test('Should generate a valid Output, the arrow is positioned after colon', () => {
-    const [, log] = checkCommitMessages(`feat: `)
+    const [, log] = processCommitMessage(`feat: `, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat: 

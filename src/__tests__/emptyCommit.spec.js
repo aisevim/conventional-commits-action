@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexEmptyCommit = rulesConfig.find(rule => rule.id === 'EmptyCommit')?.regex
 
 describe('The commit is required', () => {
   test('Should generate a valid Output, the arrow is positioned on beggining', () => {
-    const [, log] = checkCommitMessages(``)
+    const [, log] = processCommitMessage(``, false)
     expect(log).toMatchInlineSnapshot(`
       "
 

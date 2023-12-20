@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexEmptyScope = rulesConfig.find(rule => rule.id === 'EmptyScope')?.regex
 
 describe('The scope need to have characters', () => {
   test('Should generate a valid Output, the arrow is positioned on parenthesis', () => {
-    const [, log] = checkCommitMessages(`feat(): some feat`)
+    const [, log] = processCommitMessage(`feat(): some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat(): some feat

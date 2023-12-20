@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexCharacterBetweenTypeAndColon = rulesConfig.find(rule => rule.id === 'CharacterBetweenTypeAndColon')?.regex
 
 describe('No Characters between type and color', () => {
   test('Should generate a valid Output, with the arrow centered on the invalid characters', () => {
-    const [, log] = checkCommitMessages(`feat asd    : some feat`)
+    const [, log] = processCommitMessage(`feat asd    : some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat asd    : some feat

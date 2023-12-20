@@ -1,6 +1,6 @@
 import { Chalk } from 'chalk'
 
-import { rulesConfig } from './rules.js'
+import { rulesConfig } from './rules-configs.js'
 import { replaceTextByPosition } from './utils.js'
 
 function createMatrix(rows, cols) {
@@ -40,8 +40,8 @@ function hasError(matrix) {
     .replace(/\s+$/g, ''))
 }
 
-export function checkCommitMessages(message, colorLevel = 0) {
-  const customChalk = new Chalk({ level: colorLevel })
+export function processCommitMessage(message, enableColor = true) {
+  const customChalk = new Chalk({ level: enableColor ? 3 : 0 })
   const postion = []
   const commitHeadline = message.split('\n')?.[0]
   let msg = commitHeadline || message
@@ -51,8 +51,9 @@ export function checkCommitMessages(message, colorLevel = 0) {
   for (const rule of rulesConfig) {
     const match = msg.match(rule.regex)
     const position = match?.indices?.groups?.position
+    const ruleNotMatch = position
 
-    if (position) {
+    if (ruleNotMatch) {
       matrix = applyRuleToMatrix(matrix, position, rule.errorMessage, customChalk[rule.color])
       matrix.push(...createMatrix(2, maxLength))
       postion.push({ color: rule.color, position })

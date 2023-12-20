@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
+import { processCommitMessage } from '../commit-log-processor'
 
 describe('Generated Logs with only 1 error, focus on priorization', () => {
   test('Should have only 1 error and ignore others when a 1 or more characters is asigned without colon', () => {
-    const [, log] = checkCommitMessages(`docs`)
+    const [, log] = processCommitMessage(`docs`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       docs
@@ -17,7 +17,7 @@ describe('Generated Logs with only 1 error, focus on priorization', () => {
   })
 
   test('Should have only 1 error and ignore others, colon priorized', () => {
-    const [, log] = checkCommitMessages(` docs `)
+    const [, log] = processCommitMessage(` docs `, false)
     expect(log).toMatchInlineSnapshot(`
       "
        docs 
@@ -33,7 +33,7 @@ describe('Generated Logs with only 1 error, focus on priorization', () => {
 
 describe('Generated Logs with multiple errors', () => {
   test('Should have 2 errors', () => {
-    const [, log] = checkCommitMessages(`docs(): `)
+    const [, log] = processCommitMessage(`docs(): `, false)
     expect(log).toMatchInlineSnapshot(`
       "
       docs(): 
@@ -48,7 +48,7 @@ describe('Generated Logs with multiple errors', () => {
   })
 
   test('Should have 3 errors', () => {
-    const [, log] = checkCommitMessages(`docs() : `)
+    const [, log] = processCommitMessage(`docs() : `, false)
     expect(log).toMatchInlineSnapshot(`
       "
       docs() : 
@@ -65,7 +65,7 @@ describe('Generated Logs with multiple errors', () => {
   })
 
   test('Should have 4 errors', () => {
-    const [, log] = checkCommitMessages(`docs () : `)
+    const [, log] = processCommitMessage(`docs () : `, false)
     expect(log).toMatchInlineSnapshot(`
       "
       docs () : 
@@ -84,7 +84,7 @@ describe('Generated Logs with multiple errors', () => {
   })
 
   test('Should return 5 errors', () => {
-    const [, log] = checkCommitMessages(`docs () :`)
+    const [, log] = processCommitMessage(`docs () :`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       docs () :
@@ -107,7 +107,7 @@ describe('Generated Logs with multiple errors', () => {
 
 describe('Generate Logs with colors/style', () => {
   test('Should return 5 errors in colors', () => {
-    const [, log] = checkCommitMessages(`docs () :`, 1)
+    const [, log] = processCommitMessage(`docs () :`)
     expect(log).toMatchInlineSnapshot(`
       "
       docs[2m[3m[4m[36m [39m[24m[23m[22m[2m[3m[4m[35m([39m[24m[23m[22m[2m[3m[4m[35m)[39m[24m[23m[22m[2m[3m[4m[33m [39m[24m[23m[22m:
@@ -131,15 +131,15 @@ describe('Generate Logs with colors/style', () => {
 
 describe.concurrent('Return programticly boolean to know de commit validation', () => {
   test.concurrent('Should return `true` when commit is invalid', () => {
-    const [hasError] = checkCommitMessages(`docs: `)
+    const [hasError] = processCommitMessage(`docs: `)
     expect(hasError).toBeTruthy()
 
-    const [hasError2] = checkCommitMessages(``)
+    const [hasError2] = processCommitMessage(``)
     expect(hasError2).toBeTruthy()
   })
 
   test.concurrent('Should return `false` when commit is valid', () => {
-    const [hasError] = checkCommitMessages(`docs: fooo`)
+    const [hasError] = processCommitMessage(`docs: fooo`)
     expect(hasError).toBeFalsy()
   })
 })

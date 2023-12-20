@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexMissingColon = rulesConfig.find(rule => rule.id === 'MissingColon')?.regex
 
 describe('A Colon is required after type or scope and before space', () => {
   test('Should generate a valid Output, the arrow is positionned in ending', () => {
-    const [, log] = checkCommitMessages(`feat some feat`)
+    const [, log] = processCommitMessage(`feat some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat some feat

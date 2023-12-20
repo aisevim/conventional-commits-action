@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexMissingSpace = rulesConfig.find(rule => rule.id === 'MissingSpace')?.regex
 
 describe('A space is required after colon', () => {
   test('Should generate a valid Output, the arrow is positioned after colon', () => {
-    const [, log] = checkCommitMessages(`feat:some feat`)
+    const [, log] = processCommitMessage(`feat:some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat:some feat
