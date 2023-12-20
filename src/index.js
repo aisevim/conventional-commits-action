@@ -1,7 +1,7 @@
 import core from '@actions/core'
 import github from '@actions/github'
 
-import { checkCommitMessages } from './checker.js'
+import { processCommitMessage } from './commit-log-processor.js'
 
 const maxCommitsPerPage = 100
 
@@ -20,7 +20,6 @@ async function run() {
     const octokit = github.getOctokit(core.getInput('github-token'))
     const hasTitlePR = core.getInput('has-pr-title')
     const hasCommits = core.getInput('has-commits')
-    const colorLevel = core.getInput('color-level')
     const logs = []
     const page = 1
     let text = ''
@@ -37,7 +36,7 @@ async function run() {
       logs.push({ text, type: 'pr-commit' })
     }
 
-    generateLog(logs, colorLevel)
+    generateLog(logs)
   } catch (error) {
     core.setFailed(error.message)
   }
@@ -64,11 +63,11 @@ async function getCommits(octokit, page) {
   return commits
 }
 
-function generateLog(_logs, colorLevel) {
+function generateLog(_logs) {
   let hasError = false
 
   _logs.forEach(({ text, type }) => {
-    const [isCommitInvalid, log] = checkCommitMessages(text, colorLevel)
+    const [isCommitInvalid, log] = processCommitMessage(text)
     const logType = type === 'pr-title' ? 'PR title' : 'commit message'
 
     if (isCommitInvalid) {

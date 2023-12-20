@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexCharacterAfterScopeBeforeColon = rulesConfig.find(rule => rule.id === 'CharacterAfterScopeBeforeColon')?.regex
 
 describe('No character between scope and colon', () => {
   test('Should generate a valid Output, with the arrow centered on the invalid characters', () => {
-    const [, log] = checkCommitMessages(`feat(foo)  asdas : some feat`)
+    const [, log] = processCommitMessage(`feat(foo)  asdas : some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat(foo)  asdas : some feat

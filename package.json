@@ -20,8 +20,8 @@
     ".": "./dist/index.js"
   },
   "scripts": {
-    "test": "vitest",
-    "test:ci": "vitest run",
+    "test": "npm run build ; vitest",
+    "test:ci": "npm run build ; vitest run",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "build": "ncc build src/index.js --minify --license licenses.txt",

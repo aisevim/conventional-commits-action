@@ -1,19 +1,19 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexMaxCharacters = rulesConfig.find(rule => rule.id === 'MaxCharacters')?.regex
 
 describe('The commit message summary be no longer than 50 characters.', () => {
   test('Should generate a valid Output, with the arrow centered on the invalid characters', () => {
-    const [, log] = checkCommitMessages(`feat: Update documentation with a very long commit message that will be invalid`)
+    const [, log] = processCommitMessage(`feat: Update documentation with a very long commit message that will be invalid`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat: Update documentation with a very long commit message that will be invalid
                                                                       ↑
                                                                       ┆
-                                                                      ╵--- The commit message summary be no longer than 50 characters.
+                                                                      ╵--- Commit summary must be under 50 characters.
 
       "
     `)

@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexLeadingTrailingSpace = rulesConfig.find(rule => rule.id === 'LeadingTrailingSpace')?.regex
 
 describe('No space before the commit', () => {
   test('Should generate a valid Output, the arrow is positioned on beggining', () => {
-    const [, log] = checkCommitMessages(`     feat: some feat`)
+    const [, log] = processCommitMessage(`     feat: some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
            feat: some feat

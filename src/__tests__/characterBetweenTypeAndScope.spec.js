@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexCharacterBetweenTypeAndScope = rulesConfig.find(rule => rule.id === 'CharacterBetweenTypeAndScope')?.regex
 
 describe('Characters between type and scope are not allowed', () => {
   test('Should generate a valid Output, with the arrow centered on the invalid characters', () => {
-    const [, log] = checkCommitMessages(`feat asd  (foo): some feat`)
+    const [, log] = processCommitMessage(`feat asd  (foo): some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feat asd  (foo): some feat

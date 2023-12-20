@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { checkCommitMessages } from '../checker'
-import { rulesConfig } from '../rules'
+import { processCommitMessage } from '../commit-log-processor'
+import { rulesConfig } from '../rules-configs'
 
 const regexUnknownType = rulesConfig.find(rule => rule.id === 'UnknownType')?.regex
 
 describe('The type is unkown, need to be `chore|docs|feat|fix|perf|refactor|style|test`', () => {
   test('Should generate a valid output, with the arrow centered on the invalid type.', () => {
-    const [, log] = checkCommitMessages(`feas: some feat`)
+    const [, log] = processCommitMessage(`feas: some feat`, false)
     expect(log).toMatchInlineSnapshot(`
       "
       feas: some feat
