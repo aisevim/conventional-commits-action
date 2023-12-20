@@ -18,8 +18,8 @@ async function run() {
 
   try {
     const octokit = github.getOctokit(core.getInput('github-token'))
-    const hasTitlePR = core.getInput('has-pr-title')
-    const hasCommits = core.getInput('has-commits')
+    const hasTitlePR = core.getInput('check-pr-title')
+    const hasCommits = core.getInput('check-commits')
     const logs = []
     const page = 1
     let text = ''
