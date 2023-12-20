@@ -29,5 +29,6 @@ describe('Return specific rules when the commit contain only `:` character, igno
 
   test.concurrent('Should match', () => {
     expect(':'.match(regexMissingType)?.groups?.position).toBe(':')
+    expect('():'.match(regexMissingType)?.groups?.position).toBe(':')
   })
 })

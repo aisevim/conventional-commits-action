@@ -22,18 +22,17 @@ describe('A space is required after colon', () => {
   describe.concurrent('Some cases are deliberately ignored to anticipate a possible problem in the rendering.', () => {
     test.concurrent('Should not match', () => {
       // Deliberately ignored
+      expect(' '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
+      expect(': '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
+      expect(': Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
+
+      // Need to be ignored
       expect('docs: '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
       expect('docs: Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
       expect('docs!: Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
       expect('docs(foo): '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
       expect('docs(foo): Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
       expect('docs(foo)!: Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
-      expect('doas(foo)!:Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
-
-      // Need to be ignored
-      expect(' '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
-      expect(': '.match(regexMissingSpace)?.groups?.position).toBeUndefined()
-      expect(': Update documentation'.match(regexMissingSpace)?.groups?.position).toBeUndefined()
     })
   })
 
@@ -49,5 +48,7 @@ describe('A space is required after colon', () => {
 
     expect('docs(foo):'.match(regexMissingSpace)?.groups?.position).toBe('')
     expect('docs(foo)!:'.match(regexMissingSpace)?.groups?.position).toBe('')
+
+    expect('doas(foo)!:Update documentation'.match(regexMissingSpace)?.groups?.position).toBe('')
   })
 })
