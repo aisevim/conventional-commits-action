@@ -3,7 +3,7 @@ import { expect, test, describe } from 'vitest'
 import { ignoreByRegex } from '../utils'
 
 describe('ignoreByRegex', () => {
-  test('Should get only text', () => {
+  test('Should get only not matched object', () => {
     const array = [
       { text: 'feat: valid' },
       { text: 'Merge is ignored' },
