@@ -69,7 +69,7 @@ jobs:
           check-commits: false
 ```
 
-### On Last Commit Change
+### On Last Commit Change and disable bypass
 
 ```yaml
 name: Pull Request Commit Message Checker
@@ -94,6 +94,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           check-pr-title: false
+          bypass-checks: ".+"
 ```
 
 ## Outputs Examples
