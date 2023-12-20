@@ -9,11 +9,12 @@ Enforce [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) fo
 
 ## Inputs
 
-| Input            | Description                         | Required | Default |
-| ---------------- | ----------------------------------- | -------- | ------- |
-| `github-token`   | Token for repository access         | true     |         |
-| `check-pr-title` | Enable PR title checking            | false    | true    |
-| `check-commits`  | Enable last commit message checking | false    | true    |
+| Input            | Description                         | Required | Default                            |
+| ---------------- | ----------------------------------- | -------- | ---------------------------------- |
+| `github-token`   | Token for repository access         | true     |                                    |
+| `check-pr-title` | Enable PR title checking            | false    | true                               |
+| `check-commits`  | Enable last commit message checking | false    | true                               |
+| `bypass-checks`  | A regex to bypass checks            | false    | `^wip\|Wip\|Merge\|Revert\|revert` |
 
 ## Usage
 
