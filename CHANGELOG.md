@@ -1,5 +1,17 @@
 # Commit Harmonizer Changelog
 
+# [0.4.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.3.0...v0.4.0) (2023-12-20)
+
+
+### Bug Fixes
+
+* color support ([bfc0ba9](https://github.com/aisevim/commit-harmonizer-action/commit/bfc0ba9a7d89d3905b585052555b29bd9c96804e))
+
+
+### Features
+
+* possibility to generate colorized log ([6234701](https://github.com/aisevim/commit-harmonizer-action/commit/62347014a12c6803a2f8f0e07fec369a887e10ca))
+
 # [0.3.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.2.0...v0.3.0) (2023-12-19)
 
 
