@@ -1,5 +1,5 @@
 # Commit Harmonizer
-[![Tests](https://github.com/aisevim/commit-harmonizer-action/workflows/Tests/badge.svg)](https://github.com/aisevim/commit-harmonizer-action)
+[![Tests](https://github.com/aisevim/commit-harmonizer-action/actions/workflows/build-test.yml/badge.svg?branch=master)](https://github.com/aisevim/commit-harmonizer-action)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/aisevim/commit-harmonizer-action)](https://github.com/aisevim/commit-harmonizer-action/tags)
 
 Enforce [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format for **Commit** and **PR titles** with clear error output
