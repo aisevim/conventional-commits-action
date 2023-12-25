@@ -105,8 +105,6 @@ jobs:
 
 ![Log example-3](resources/output3.jpg) 
 
-![Log example-4](resources/output4.jpg) 
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
