@@ -1,5 +1,12 @@
 # Commit Harmonizer Changelog
 
+## [0.5.2](https://github.com/aisevim/commit-harmonizer-action/compare/v0.5.1...v0.5.2) (2023-12-25)
+
+
+### Bug Fixes
+
+* **rules:** change max characteres 50 to 72 ([11ff35c](https://github.com/aisevim/commit-harmonizer-action/commit/11ff35c03ede6cb511576e8fe44e24cd93a5dbc1))
+
 ## [0.5.1](https://github.com/aisevim/commit-harmonizer-action/compare/v0.5.0...v0.5.1) (2023-12-20)
 
 # [0.5.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.4.1...v0.5.0) (2023-12-20)
