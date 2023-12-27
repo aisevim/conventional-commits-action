@@ -4,9 +4,6 @@
 
 Enforce [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format for **Commit** and **PR titles** with clear error output
 
-> [!NOTE]
-> Regular expressions (regex) are chosen for commit message validation due to their capability to precisely identify error positions. Unlike Conventional Commits Parser, regex provides detailed error localization, facilitating immediate and exact feedback on commit message errors. 
-
 ## Inputs
 
 | Input            | Description                         | Required | Default                            |
