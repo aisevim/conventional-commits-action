@@ -19,7 +19,7 @@ export const rulesConfig = [
   },
   {
     id: 'MissingSpace',
-    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test)?(.+)?:(?<position>(?!\s))(.+)?/d,
+    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test|build)?(.+)?:(?<position>(?!\s))(.+)?/d,
     color: 'white',
     errorMessage: 'Space after the colon is required.',
   },
@@ -37,7 +37,7 @@ export const rulesConfig = [
   },
   {
     id: 'CharacterAfterScopeBeforeColon',
-    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:!)?)(?<position>.+)?:(.+)?/d,
+    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test|build)(?:.+)?(?:(?:\([-A-Za-z0-9_ ]+\)|\(\))(?:!)?)(?<position>.+)?:(.+)?/d,
     color: 'yellow',
     errorMessage: 'Unexpected character before the colon in the commit message.',
   },
@@ -49,19 +49,19 @@ export const rulesConfig = [
   },
   {
     id: 'CharacterBetweenTypeAndScope',
-    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test)(?<position>.+)(?:(?:\([-A-Za-z0-9_ ]*\))|(\(\)))(.+)?:(.+)?/d,
+    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test|build)(?<position>.+)(?:(?:\([-A-Za-z0-9_ ]*\))|(\(\)))(.+)?:(.+)?/d,
     color: 'cyan',
     errorMessage: 'Unexpected character between commit type and scope.',
   },
   {
     id: 'CharacterBetweenTypeAndColon',
-    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test)(?!(?:.*)(\([-A-Za-z0-9_ ]+\)|\(\)))(?:!?|!?(?<position>.+)):(?:.+)?/d,
+    regex: /^(?:chore|docs|feat|fix|perf|refactor|style|test|build)(?!(?:.*)(\([-A-Za-z0-9_ ]+\)|\(\)))(?:!?|!?(?<position>.+)):(?:.+)?/d,
     color: 'blue',
     errorMessage: 'Unexpected character between commit type and colon.',
   },
   {
     id: 'UnknownType',
-    regex: /^(?!(?:chore|docs|feat|fix|perf|refactor|style|test))(\s+)?\b(?!(?:chore|docs|feat|fix|perf|refactor|style|test)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/d,
+    regex: /^(?!(?:chore|docs|feat|fix|perf|refactor|style|test|build))(\s+)?\b(?!(?:chore|docs|feat|fix|perf|refactor|style|test|build)\b)(?<position>[-A-Za-z0-9_ ]+)\b(?=.*:)/d,
     color: 'blue',
     errorMessage: 'Unrecognized commit type used.',
   },
