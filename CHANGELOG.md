@@ -1,5 +1,12 @@
 # Commit Harmonizer Changelog
 
+# [0.6.0](https://github.com/aisevim/commit-harmonizer-action/compare/v0.5.2...v0.6.0) (2024-04-19)
+
+
+### Features
+
+* **type:** add new type build ([#15](https://github.com/aisevim/commit-harmonizer-action/issues/15)) ([3c3fe57](https://github.com/aisevim/commit-harmonizer-action/commit/3c3fe57a985f9234b6431cda8d440ab6f47347bc))
+
 ## [0.5.2](https://github.com/aisevim/commit-harmonizer-action/compare/v0.5.1...v0.5.2) (2023-12-25)
 
 
