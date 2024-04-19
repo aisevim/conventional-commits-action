@@ -4,7 +4,7 @@ import github from '@actions/github'
 import { processCommitMessage } from './commit-log-processor.js'
 import { ignoreByRegex } from './utils.js'
 
-const maxCommitsPerPage = 100
+const MAX_PER_PAGE = 100
 
 async function run() {
   const onActions = (
@@ -23,7 +23,6 @@ async function run() {
     const hasCommits = core.getInput('check-commits')
     const bypass = core.getInput('bypass-checks')
     const logs = []
-    const page = 1
     let text = ''
 
     if (hasTitlePR) {
@@ -32,7 +31,7 @@ async function run() {
     }
 
     if (hasCommits) {
-      const commitsInfo = await getCommits(octokit, page)
+      const commitsInfo = await getCommits(octokit)
       const commitInfo = commitsInfo?.at(-1)
       text = commitInfo?.commit?.message ?? ''
       logs.push({ text, type: 'pr-commit' })
@@ -44,25 +43,13 @@ async function run() {
   }
 }
 
-async function getCommits(octokit, page) {
-  const commits = []
-
-  const commitsInfo = await octokit.rest.pulls.listCommits({
+async function getCommits(octokit) {
+  return octokit.paginate(octokit.rest.pulls.listCommits, {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     pull_number: github.context.payload.pull_request?.number,
-    per_page: maxCommitsPerPage,
-    page,
+    per_page: MAX_PER_PAGE,
   })
-
-  commits.push(...commitsInfo.data)
-
-  if (commitsInfo.length === maxCommitsPerPage) {
-    page++
-    commits.push(...(await getCommits(page)))
-  }
-
-  return commits
 }
 
 function generateLog(_logs) {
