@@ -38,7 +38,7 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@vercel/ncc": "^0.38.1",
     "eslint": "^8.56.0",
-    "eslint-config-symmetrys": "^0.8.1",
+    "eslint-config-symmetrys": "^0.11.1",
     "release-it": "^17.0.0",
     "vitest": "^1.1.0"
   }
